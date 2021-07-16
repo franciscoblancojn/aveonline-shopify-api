@@ -1,5 +1,9 @@
 require('module-alias/register')
+const dotenv = require('dotenv');
+const nonce = require('nonce')();
 const fs = require('fs');
+
+dotenv.config();
 
 exports.index = async (req, res, next) => {
     const {shop , session } = req.query;
@@ -22,19 +26,20 @@ exports.index = async (req, res, next) => {
         });
     }else if (shop) {
 
-        // const state = nonce();
-        // // shopify callback redirect
-        // const redirectURL = process.env.SHOPIFY_APP_URL + '/auth/callback';
+        const state = nonce();
+        // shopify callback redirect
+        const redirectURL = process.env.SHOPIFY_APP_URL + '/auth/callback';
 
-        // // Install URL for app install
-        // const shopifyURL = 'https://' + shop +
-        //     '/admin/oauth/request_grant?client_id=' + process.env.SHOPIFY_API_KEY +
-        //     '&scope=' + process.env.SHOPIFY_API_SCOPES +
-        //     '&redirect_uri=' + redirectURL +
-        //     '&state=' + state ;
+        // Install URL for app install
+        const shopifyURL = 'https://' + shop +
+            '/admin/oauth/request_grant?client_id=' + process.env.SHOPIFY_API_KEY +
+            '&scope=' + process.env.SHOPIFY_API_SCOPES +
+            '&redirect_uri=' + redirectURL +
+            '&state=' + state ;
 
-        // res.cookie('state', state);
-        // res.redirect(shopifyURL);
+        res.cookie('state', state);
+        res.redirect(shopifyURL);
+        return;
     } else {
         return res.status(400).send({
             type:"error",
