@@ -80,6 +80,25 @@
    }
  }
  /**
+   * upsert
+   * @description funcion de DB para crear y actualizar a la vez
+   * @param {where,table}
+   * @returns {respond}
+   */
+ const upsert = async ({ create, update, where, table }) => {
+   try{
+     const prisma = new PrismaClient()
+     const respond = await prisma[table].upsert({ create, update, where })
+     await prisma.$disconnect()
+     return respond
+   } catch (error) {
+     return {
+         type: 'error',
+         error: `${error}`
+     }
+   }
+ }
+ /**
    * db
    * @description objeto usado por enpoints en el forlder enpoints para hacer crud en base de datos
    */
@@ -87,7 +106,8 @@
    get,
    post,
    put,
-   delete: delete_
+   delete: delete_,
+   upsert
  }
  
  module.exports = db
