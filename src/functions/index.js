@@ -1,4 +1,4 @@
-const db = require('@app/db')
+const db = require('@app/db.js')
 
 exports.saveToken = (shop,accessToken) => {
     

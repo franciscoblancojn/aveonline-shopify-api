@@ -19,6 +19,7 @@
   },
   "homepage": "https://gitlab.com/franciscoblancojn/aveonline-shopify-nodejs#readme",
   "dependencies": {
+    "@prisma/client": "^2.27.0",
     "body-parser": "^1.19.0",
     "crypto": "^1.0.1",
     "dotenv": "^10.0.0",
@@ -41,5 +42,11 @@
     "@middlewares": "src/middlewares/",
     "@page": "src/page/",
     "@routes": "src/routes/"
+  },
+  "devDependencies": {
+    "prisma": "^2.27.0"
+  },
+  "prisma": {
+    "schema": "src/prisma/schema.prisma"
   }
 }
