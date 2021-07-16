@@ -1,0 +1,19 @@
+{
+  "name": "aveonlineshopifynodejs",
+  "version": "1.0.0",
+  "description": "app of shopify for aveonline with nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/franciscoblancojn/aveonline-shopify-nodejs.git"
+  },
+  "author": "blancofrancisco34@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/franciscoblancojn/aveonline-shopify-nodejs/issues"
+  },
+  "homepage": "https://gitlab.com/franciscoblancojn/aveonline-shopify-nodejs#readme"
+}
