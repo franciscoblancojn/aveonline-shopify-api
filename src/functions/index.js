@@ -1,0 +1,3 @@
+exports.saveToken = (shop,accessToken) => {
+    
+}

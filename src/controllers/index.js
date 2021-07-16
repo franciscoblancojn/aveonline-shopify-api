@@ -3,6 +3,7 @@ const crypto = require('crypto');
 const request = require('request-promise');
 const querystring = require('querystring');
 const dotenv = require('dotenv');
+const functions = require('@functions/index')
 
 const fs = require('fs');
 
@@ -58,10 +59,10 @@ exports.auth = async (req, res, next) =>{
             const accessToken = accessTokenResponse.access_token;
             const shopRequestURL = 'https://' + shop + '/admin/api/2020-04/shop.json';
             const shopRequestHeaders = {'X-Shopify-Access-Token': accessToken};
-            saveToken(shop,accessToken)
+            functions.saveToken(shop,accessToken)
             request.get(shopRequestURL, {headers: shopRequestHeaders})
                 .then((shopResponse) => {
-                    res.redirect('https://' + shop + '/admin/apps/elios');
+                    res.redirect('https://' + shop + '/admin/apps/'.process.env.NAME);
                 })
                 .catch((error) => {
                     res.status(error.statusCode).send(error.error.error_description);
