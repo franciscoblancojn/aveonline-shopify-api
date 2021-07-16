@@ -20,6 +20,11 @@
     "module-alias": "^2.2.2"
   },
   "_moduleAliases": {
-    "@app": "src/"
+    "@app": "src/",
+    "@controllers": "src/controllers/",
+    "@functions": "src/functions/",
+    "@middlewares": "src/middlewares/",
+    "@page": "src/page/",
+    "@routes": "src/routes/"
   }
 }
