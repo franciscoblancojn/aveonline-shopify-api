@@ -7,5 +7,7 @@ const router = require('express').Router()
 
 router.get("/",[middlewares.index],controllers.index)
 
+router.get("/auth/callback",[middlewares.auth],controllers.auth)
+
 
 module.exports = router
