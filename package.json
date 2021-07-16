@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://gitlab.com/franciscoblancojn/aveonline-shopify-nodejs/issues"
   },
-  "homepage": "https://gitlab.com/franciscoblancojn/aveonline-shopify-nodejs#readme"
+  "homepage": "https://gitlab.com/franciscoblancojn/aveonline-shopify-nodejs#readme",
+  "dependencies": {
+    "module-alias": "^2.2.2"
+  },
+  "_moduleAliases": {
+    "@app": "src/"
+  }
 }
