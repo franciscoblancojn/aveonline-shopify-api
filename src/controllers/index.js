@@ -1,15 +1,15 @@
+//require libs
 require('module-alias/register')
-const crypto = require('crypto');
-const request = require('request-promise');
-const querystring = require('querystring');
-const dotenv = require('dotenv');
-const functions = require('@functions/index')
+
+//require db
 const db = require('@app/db')
 
-const fs = require('fs');
-
-dotenv.config();
-
+/**
+ * saveToken
+ * @description save token with shop unique
+ * @param {shop,token} 
+ * @return {respond}
+ */
 exports.saveToken = async (req, res, next) =>{
     const {shop, token} = req.body;
     const create = {shop, token}
@@ -23,6 +23,12 @@ exports.saveToken = async (req, res, next) =>{
     })
     res.send(respond)
 }
+/**
+ * getToken
+ * @description return token form shop
+ * @param {shop} 
+ * @return {respond}
+ */
 exports.getToken = async (req, res, next) =>{
     const {shop} = req.headers;
     const respond = await db.get({

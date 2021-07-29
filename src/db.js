@@ -1,5 +1,5 @@
 /**
- * load prisma npm
+ * load prisma npm for use method form database 
  */
  const { PrismaClient } = require('@prisma/client')
 
