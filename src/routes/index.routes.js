@@ -5,8 +5,8 @@ const controllers = require('@controllers/index')
 const router = require('express').Router()
 
 
-router.get("/getToken",[middlewares.validateApiKey],controllers.getToken)
-router.post("/saveToken",[middlewares.saveToken],controllers.saveToken)
+router.get("/getToken",[middlewares.validateApiKey,middlewares.getToken],controllers.getToken)
+router.post("/saveToken",[middlewares.validateApiKey,middlewares.saveToken],controllers.saveToken)
 
 
 

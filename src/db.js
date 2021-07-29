@@ -9,18 +9,18 @@
    * @param {where,table}
    * @returns {respond}
    */
- const get = async ({ where, table }) => {
-   try {
-     const prisma = new PrismaClient()
-     const respond = await prisma[table].findMany({where})
-     await prisma.$disconnect()
-     return respond
-   } catch (error) {
-     return {
-         type: 'error',
-         error: `${error}`
-     }
-   }
+ const get = async ({ where = {}, table }) => {
+    try {
+      const prisma = new PrismaClient()
+      const respond = await prisma[table].findMany({where})
+      await prisma.$disconnect()
+      return respond
+    } catch (error) {
+      return {
+        type: 'error',
+        error: `${error}`
+      }
+    }
  }
  /**
    * Post

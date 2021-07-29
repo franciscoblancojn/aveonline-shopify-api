@@ -19,16 +19,17 @@ exports.saveToken = async (req, res, next) =>{
         where:{
             shop
         }, 
-        table : "Tokens"
+        table : "tokens"
     })
     res.send(respond)
 }
 exports.getToken = async (req, res, next) =>{
-    const {shop} = req.query;
+    const {shop} = req.headers;
     const respond = await db.get({
         where:{
             shop
-        }
+        }, 
+        table : "tokens"
     })
     res.send(respond)
 }

@@ -10,6 +10,6 @@ generator client {
   provider = "prisma-client-js"
 }
 model Tokens {
-  host                 String   @unique @db.VarChar(255)
+  shop                 String   @unique @db.VarChar(255)
   token                String   @db.VarChar(255)
 }
