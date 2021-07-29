@@ -9,7 +9,7 @@ const routes = require('@routes/index.routes')
 /**
  * @description port and rute
  */
-const port = 3000
+const port = 3001
 
 /**
  * @description load app

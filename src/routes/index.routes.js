@@ -5,9 +5,9 @@ const controllers = require('@controllers/index')
 const router = require('express').Router()
 
 
-router.get("/",[middlewares.index],controllers.index)
+router.get("/getToken",[middlewares.validateApiKey],controllers.getToken)
+router.post("/saveToken",[middlewares.saveToken],controllers.saveToken)
 
-router.get("/auth/callback",[middlewares.auth],controllers.auth)
 
 
 module.exports = router
