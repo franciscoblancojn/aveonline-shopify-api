@@ -30,7 +30,7 @@ exports.saveToken = async (req, res, next) =>{
  * @return {respond}
  */
 exports.getToken = async (req, res, next) =>{
-    const {shop} = req.headers;
+    const {shop} = req.body;
     const respond = await db.get({
         where:{
             shop

@@ -30,7 +30,7 @@ exports.saveToken = async (req, res, next) => {
  * @return {next()/send(error)}
  */
 exports.validateApiKey = async (req, res, next) => {
-    const {key} = req.headers;
+    const {key} = req.body;
     if(key == process.env.APIKEY){
         next()
     } else {
@@ -47,7 +47,7 @@ exports.validateApiKey = async (req, res, next) => {
  * @return {next()/send(error)}
  */
 exports.getToken = async (req, res, next) => {
-    const {shop} = req.headers;
+    const {shop} = req.body;
     if(shop){
         next()
     } else {

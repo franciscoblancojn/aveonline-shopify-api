@@ -11,7 +11,7 @@ const router = require('express').Router()
  * @middlewares [validateApiKey, getToken]
  * @controllers getToken
  */
-router.get("/getToken",[middlewares.validateApiKey,middlewares.getToken],controllers.getToken)
+router.post("/getToken",[middlewares.validateApiKey,middlewares.getToken],controllers.getToken)
 /**
  * @rute saveToken
  * @description enpoint for save token with shop
