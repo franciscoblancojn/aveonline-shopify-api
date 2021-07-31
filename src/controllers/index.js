@@ -3,6 +3,7 @@ require('module-alias/register')
 
 //require db
 const db = require('@app/db')
+const functions = require('@functions/index')
 
 /**
  * saveToken
@@ -37,5 +38,24 @@ exports.getToken = async (req, res, next) =>{
         }, 
         table : "tokens"
     })
+    res.send(respond)
+}
+/**
+ * getMetafields
+ * @description return metafields form shop
+ * @param {shop,token} 
+ * @return {respond}
+ */
+exports.getMetafields = async (req, res, next) =>{
+    const {shop,token} = req.body;
+    const config = {
+        method: 'get',
+        url: `https://${shop}/admin/api/2021-01/metafields.json`,
+        headers: { 
+            'X-Shopify-Access-Token': token
+        },
+        data : ""
+    };
+    const respond = await functions.request(config)
     res.send(respond)
 }

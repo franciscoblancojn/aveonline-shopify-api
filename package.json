@@ -4,11 +4,12 @@
   "description": "app of shopify for aveonline with nodejs",
   "main": "index.js",
   "scripts": {
-    "init":"npx prisma migrate reset && npx prisma migrate dev",
+    "init": "npx prisma migrate reset && npx prisma migrate dev",
     "start": "npx prisma generate && node src/api.js",
     "dev": "npx prisma generate && nodemon --watch src src/api.js",
-    "pm2init" : "pm2 start src/api.js && pm2 save",
-    "pm2restart" : "pm2 restart src/api.js && pm2 save"
+    "test": "nodemon src/test.js",
+    "pm2init": "pm2 start src/api.js && pm2 save",
+    "pm2restart": "pm2 restart src/api.js && pm2 save"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
   "homepage": "https://gitlab.com/franciscoblancojn/aveonline-shopify-nodejs#readme",
   "dependencies": {
     "@prisma/client": "^2.27.0",
+    "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "crypto": "^1.0.1",
     "dotenv": "^10.0.0",
@@ -31,6 +33,7 @@
     "mongodb": "^4.0.0",
     "monk": "^7.3.4",
     "morgan": "^1.10.0",
+    "node-fetch": "^2.6.1",
     "nodemon": "^2.0.12",
     "nonce": "^1.0.4",
     "path": "^0.12.7",

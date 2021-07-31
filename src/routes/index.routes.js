@@ -11,13 +11,20 @@ const router = require('express').Router()
  * @middlewares [validateApiKey, getToken]
  * @controllers getToken
  */
-router.post("/getToken",[middlewares.validateApiKey,middlewares.getToken],controllers.getToken)
+router.post("/getToken",[middlewares.validateApiKey,middlewares.validateShop],controllers.getToken)
 /**
  * @rute saveToken
  * @description enpoint for save token with shop
- * @middlewares [validateApiKey, saveToken]
+ * @middlewares [validateApiKey, validateToken, validateShop]
  * @controllers saveToken
  */
-router.post("/saveToken",[middlewares.validateApiKey,middlewares.saveToken],controllers.saveToken)
+router.post("/saveToken",[middlewares.validateApiKey,middlewares.validateToken,middlewares.validateShop],controllers.saveToken)
+/**
+ * @rute getMetafields
+ * @description enpoint for get metafields of shopify 
+ * @middlewares [validateApiKey, validateToken, validateShop]
+ * @controllers getMetafields
+ */
+router.post("/getMetafields",[middlewares.validateApiKey,middlewares.validateToken,middlewares.validateShop],controllers.getMetafields)
 
 module.exports = router

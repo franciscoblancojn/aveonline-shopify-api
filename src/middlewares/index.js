@@ -7,19 +7,19 @@ const nonce = require('nonce')();
 dotenv.config();
 
 /**
- * saveToken
- * @description verify shop and toke form body for save
+ * validateToken
+ * @description verify toke form body
  * @param {shop,token} 
  * @return {next()/send(error)}
  */
-exports.saveToken = async (req, res, next) => {
-    const {shop, token} = req.body;
-    if (shop && token) {
+exports.validateToken = async (req, res, next) => {
+    const {token} = req.body;
+    if (token) {
         next()
     } else {
         res.status(400).send({
             type:"error",
-            error:'Required parameters missing'
+            error:'Required token'
         });
     }
 }
@@ -41,12 +41,12 @@ exports.validateApiKey = async (req, res, next) => {
     }
 }
 /**
- * getToken
- * @description verify shop form headers for return token
+ * validateShop
+ * @description verify shop form body 
  * @param {shop} 
  * @return {next()/send(error)}
  */
-exports.getToken = async (req, res, next) => {
+exports.validateShop = async (req, res, next) => {
     const {shop} = req.body;
     if(shop){
         next()
