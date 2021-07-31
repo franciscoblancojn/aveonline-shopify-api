@@ -26,5 +26,12 @@ router.post("/saveToken",[middlewares.validateApiKey,middlewares.validateToken,m
  * @controllers getMetafields
  */
 router.post("/getMetafields",[middlewares.validateApiKey,middlewares.validateToken,middlewares.validateShop],controllers.getMetafields)
+/**
+ * @rute request
+ * @description enpoint for execute request
+ * @middlewares [validateApiKey, validateConfig]
+ * @controllers request
+ */
+router.post("/request",[middlewares.validateApiKey,middlewares.validateConfig],controllers.request)
 
 module.exports = router

@@ -59,3 +59,14 @@ exports.getMetafields = async (req, res, next) =>{
     const respond = await functions.request(config)
     res.send(respond)
 }
+/**
+ * request
+ * @description return result to execute request
+ * @param {config} 
+ * @return {respond}
+ */
+exports.request = async (req, res, next) =>{
+    const {config} = req.body;
+    const respond = await functions.request(config)
+    res.send(respond)
+}

@@ -57,3 +57,20 @@ exports.validateShop = async (req, res, next) => {
         });
     }
 }
+/**
+ * validateConfig
+ * @description verify config form body 
+ * @param {shop} 
+ * @return {next()/send(error)}
+ */
+exports.validateConfig = async (req, res, next) => {
+    const {config} = req.body;
+    if(config){
+        next()
+    } else {
+        res.status(400).send({
+            type:"error",
+            error:'Required config'
+        });
+    }
+}
