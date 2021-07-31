@@ -9,7 +9,8 @@
     "dev": "npx prisma generate && nodemon --watch src src/api.js",
     "test": "nodemon src/test.js",
     "pm2init": "pm2 start src/api.js && pm2 save",
-    "pm2restart": "pm2 restart src/api.js && pm2 save"
+    "pm2restart": "pm2 restart src/api.js && pm2 save",
+    "pull": "git pull origin master && npm run pm2restart"
   },
   "repository": {
     "type": "git",
