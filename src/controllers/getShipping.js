@@ -3,8 +3,8 @@ const getShipping = (req,res) => {
     res.send({
         "rates": [
             {
-                "service_name": "Aveonline",
-                "service_code": "Aveonline",
+                "service_name": "Aveonlineapp",
+                "service_code": "Aveonlineapp",
                 "total_price": "1000000",
                 "description": "This is the fastest option by far",
                 "currency": "COP"
