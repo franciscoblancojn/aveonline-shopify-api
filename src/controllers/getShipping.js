@@ -5,9 +5,9 @@ const getShipping = (req,res) => {
             {
                 "service_name": "Aveonline",
                 "service_code": "Aveonline",
-                "total_price": "1",
+                "total_price": "1000000",
                 "description": "This is the fastest option by far",
-                "currency": "USD"
+                "currency": "COP"
             }
         ]
     })
