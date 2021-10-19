@@ -7,7 +7,7 @@ const saveConfig = async (req,res) => {
             where: req.query,
             data: {
                 $set: {
-                    ...req.body,
+                    config:req.body,
                 },
             },
             table: `shops`,
