@@ -4,7 +4,7 @@ const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
-const routes = require('@routes/index.routes')
+const routes = require('@routes/_index.routes')
 
 /**
  * @description port and rute
