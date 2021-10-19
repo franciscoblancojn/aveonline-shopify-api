@@ -2,6 +2,7 @@
 require('module-alias/register')
 const middlewares = require('@middlewares/index')
 const controllers = require('@controllers/index')
+const getShipping = require('@controllers/getShipping')
 //init router
 const router = require('express').Router()
 
@@ -33,5 +34,14 @@ router.post("/getMetafields",[middlewares.validateApiKey,middlewares.validateTok
  * @controllers request
  */
 router.post("/request",[middlewares.validateApiKey,middlewares.validateConfig],controllers.request)
+
+
+
+/**
+ * @rute shipping
+ * @description enpoint for get shipping method
+ * @controllers getShipping
+ */
+ router.post("/shipping",[],getShipping)
 
 module.exports = router
