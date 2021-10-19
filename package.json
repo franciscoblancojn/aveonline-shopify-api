@@ -2,7 +2,7 @@
   "name": "aveonlineshopifynodejs",
   "version": "1.0.0",
   "description": "app of shopify for aveonline with nodejs",
-  "main": "index.js",
+  "main": "src/api.js",
   "scripts": {
     "start": "node src/api.js",
     "dev": "nodemon --watch src src/api.js",
