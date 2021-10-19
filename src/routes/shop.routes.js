@@ -1,12 +1,12 @@
 require('module-alias/register')
 
-const tokens = require('@controllers/tokens/_index')
+const shop = require('@controllers/shop/_index')
 const apiKey = require('@middlewares/apiKey')
 
 const router = require('express').Router()
 const fmiddlewares = require('fmiddlewares')
 
-router.post(
+router.get(
     "/",
     [
         apiKey,
@@ -15,16 +15,9 @@ router.post(
             shop:{
                 type:"string"
             }
-        },"query"),
-        fmiddlewares.validateItem({
-            exactItems:true,
-            token:{
-                type:"string"
-            }
-        })
+        },"query")
     ],
-    tokens.save
+    shop.get
 )
-
 
 module.exports = router

@@ -1,7 +1,7 @@
 require("module-alias/register");
 const db = require("@app/db");
 
-const saveToken = (req, res) => {
+const saveToken = async (req, res) => {
     try {
         const result = await db.put({
             where: req.query,
