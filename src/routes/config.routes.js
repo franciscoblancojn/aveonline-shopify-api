@@ -2,6 +2,7 @@
 require('module-alias/register')
 
 const config = require('@controllers/config/_index')
+const apiKey = require('@middlewares/apiKey')
 
 const router = require('express').Router()
 const fmiddlewares = require('fmiddlewares')
@@ -9,6 +10,7 @@ const fmiddlewares = require('fmiddlewares')
 router.post(
     "/",
     [
+        apiKey,
         fmiddlewares.validateItem({
             "shop": {
                 type:"string"
