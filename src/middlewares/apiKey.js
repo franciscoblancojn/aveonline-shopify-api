@@ -3,7 +3,7 @@ const env = dotenv.parsed
 const fmiddlewares = require('fmiddlewares')
 
 module.exports = fmiddlewares.validateItem({
-    APIKEY: {
+    apikey: {
     type: 'compare',
     value: env.APIKEY
   }
