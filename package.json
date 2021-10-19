@@ -10,7 +10,8 @@
     "test": "nodemon src/test.js",
     "pm2init": "pm2 start src/api.js && pm2 save",
     "pm2restart": "pm2 restart src/api.js && pm2 save",
-    "pull": "git pull origin master && npm run pm2restart"
+    "pull": "git pull origin master && npm run pm2restart",
+    "pulld":"git pull origin master && npm run dev"
   },
   "repository": {
     "type": "git",
