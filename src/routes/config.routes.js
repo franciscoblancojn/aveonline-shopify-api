@@ -10,6 +10,11 @@ router.post(
     "/",
     [
         fmiddlewares.validateItem({
+            "shop": {
+                type:"string"
+            },   
+        },"query"),
+        fmiddlewares.validateItem({
             "eneable": {
                 type:"boolean"
             },
