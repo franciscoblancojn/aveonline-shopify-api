@@ -11,6 +11,7 @@ const getShipping = async (req,res) => {
         if(!shop){
             throw new Error("Invalid Shop")
         }
+        const config = shop.config
         res.send({
             "rates": [
                 {
