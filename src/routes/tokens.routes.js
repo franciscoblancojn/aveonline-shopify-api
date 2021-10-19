@@ -24,11 +24,13 @@ router.post(
     [
         apiKey,
         fmiddlewares.validateItem({
+            exactItems:true,
             shop:{
                 type:"string"
             }
         },"query"),
         fmiddlewares.validateItem({
+            exactItems:true,
             token:{
                 type:"string"
             }
