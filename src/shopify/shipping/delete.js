@@ -1,10 +1,10 @@
 require("module-alias/register");
 const request = require("@functions/request");
 
-const getShippings = async ({ shop, token }) => {
+const deleteShippings = async ({ shop, token, id }) => {
     const result = await request({
-        method: "GET",
-        url: `https://${shop}/admin/api/2021-10/carrier_services.json`,
+        method: "DELETE",
+        url: `https://${shop}/admin/api/2021-10/carrier_services/${id}.json`,
         headers: {
             "Content-Type": "application/json",
             'X-Shopify-Access-Token': token,
@@ -12,4 +12,4 @@ const getShippings = async ({ shop, token }) => {
     });
     return result
 };
-module.exports = getShippings;
+module.exports = deleteShippings;

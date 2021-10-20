@@ -24,7 +24,7 @@
   "homepage": "https://gitlab.com/franciscoblancojn/aveonline-shopify-nodejs#readme",
   "dependencies": {
     "@prisma/client": "^2.27.0",
-    "axios": "^0.21.1",
+    "axios": "^0.23.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",

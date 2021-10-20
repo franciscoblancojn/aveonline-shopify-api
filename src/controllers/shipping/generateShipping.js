@@ -1,5 +1,6 @@
 require("module-alias/register");
 const db = require("@app/db");
+const {shipping} = require("@shopify/_index");
 
 const generateShipping = async (req,res) => {
     try {
@@ -11,8 +12,9 @@ const generateShipping = async (req,res) => {
         if(!shop){
             throw new Error("Invalid Shop")
         }
+        const respond = await shipping.get(shop)
         res.send({
-            shop
+            respond
         })
     } catch (error) {
         res.status(500).send({
