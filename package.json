@@ -49,6 +49,7 @@
     "@functions": "src/functions/",
     "@middlewares": "src/middlewares/",
     "@page": "src/page/",
+    "@shopify": "src/shopify/",
     "@routes": "src/routes/"
   },
   "devDependencies": {
