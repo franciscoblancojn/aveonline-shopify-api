@@ -50,6 +50,7 @@
     "@middlewares": "src/middlewares/",
     "@page": "src/page/",
     "@shopify": "src/shopify/",
+    "@aveonline": "src/aveonline/",
     "@routes": "src/routes/"
   },
   "devDependencies": {
