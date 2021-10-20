@@ -2,46 +2,95 @@ require("module-alias/register");
 const request = require("@functions/request");
 const getToken = require("@aveonline/getToken");
 
-const cotizar = async ({config,checkout}) => {
-    if(checkout.currency !== "COP" || checkout.destination.country !== "CO"){
-        return null
+const exampleCheckouts = {
+    origin: {
+        country: "CO",
+        postal_code: "5001",
+        province: "NSA",
+        city: "Cucuta",
+        name: null,
+        address1: "Ceina2 #3e-19",
+        address2: null,
+        address3: null,
+        phone: "",
+        fax: null,
+        email: null,
+        address_type: null,
+        company_name: "TestingApps13",
+    },
+    destination: {
+        country: "CO",
+        postal_code: "5001",
+        province: "GUA",
+        city: "Cúcuta",
+        name: "Francisco Blanco",
+        address1: "Ceiba2 #3-19",
+        address2: "",
+        address3: null,
+        phone: null,
+        fax: null,
+        email: null,
+        address_type: null,
+        company_name: null,
+    },
+    items: [
+        {
+            name: "Testing",
+            sku: "1234",
+            quantity: 1,
+            grams: 10000,
+            price: 100,
+            vendor: "TestingApps13",
+            requires_shipping: true,
+            taxable: true,
+            fulfillment_service: "manual",
+            properties: null,
+            product_id: 6840694833347,
+            variant_id: 40381576282307,
+        },
+    ],
+    currency: "COP",
+    locale: "es",
+};
+
+const cotizar = async ({ config, checkout }) => {
+    if (checkout.currency !== "COP" || checkout.destination.country !== "CO") {
+        return null;
     }
-    console.log(checkout);
-    var valorrecaudo = 0
-    const products =  checkout.items.map((e)=>{
-        valorrecaudo += e.quantity * e.price
+    var valorrecaudo = 0;
+    const products = checkout.items.map((e) => {
+        valorrecaudo += e.quantity * e.price;
         return {
-            "alto":1,//pendiente
-            "largo":1,//pendiente
-            "ancho":1,//pendiente
-            "peso": e.grams / 1000,
-            "unidades": e.quantity, 
-            "valorDeclarado": e.price,//pendiente  valor declarado custom
-        }
-    })
+            alto: 1, //pendiente
+            largo: 1, //pendiente
+            ancho: 1, //pendiente
+            peso: e.grams / 1000,
+            unidades: e.quantity,
+            valorDeclarado: e.price, //pendiente  valor declarado custom
+        };
+    });
+    const origen = config.option_agente.find((e) => e.value == config.agente);
     const data = {
-        "tipo"          : "cotizarDoble",
-        "access"        : "",
-        "token"         : getToken({config}),
-        "idempresa"     : config.cuenta,
-        "origen"        : config.option_agente.find((e)=>e.value == config.agente).idciudad,
-        "destino"       : "MEDELLIN(ANTIOQUIA)",//pendiente
-        "idasumecosto"  : 1,
-        "contraentrega" : 1,
-        "valorrecaudo"  : valorrecaudo,
-        "productos"     : products,//pendiente
-        "valorMinimo"   : (config.valorMinimo)?1:0
-    }
-    return data
-
-
+        tipo: "cotizarDoble",
+        access: "",
+        token: getToken({ config }),
+        idempresa: config.cuenta,
+        origen: origen.idciudad,
+        destino: "MEDELLIN(ANTIOQUIA)", //pendiente
+        idasumecosto: 1,
+        contraentrega: 1,
+        valorrecaudo: valorrecaudo,
+        productos: products, //pendiente
+        valorMinimo: config.valorMinimo ? 1 : 0,
+    };
     const result = await request({
         method: "POST",
-        url: ``,
+        url: "https://aveonline.co/api/nal/v1.0/generarGuiaTransporteNacional.php",
         headers: {
             "Content-Type": "application/json",
         },
+        data
     });
-    return result
+    return result;
 };
 module.exports = cotizar;
