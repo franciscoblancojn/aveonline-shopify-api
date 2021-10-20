@@ -17,7 +17,7 @@ const getShipping = async (req,res) => {
 
         const cotizacion = await cotizar({config,checkout})
 
-        // console.log(cotizacion);
+        console.log(cotizacion);
 
         res.send({
             "rates": [
