@@ -16,48 +16,48 @@ router.post(
                 type:"string"
             },   
         },"query"),
-        fmiddlewares.validateItem({
-            "eneable": {
-                type:"boolean"
-            },
-            "user": {
-                type:"string"
-            },
-            "password": {
-                type:"string"
-            },
-            "dsnitre": {
-                type:"string"
-            },
-            "dsdirre": {
-                type:"string"
-            },
-            "dstelre": {
-                type:"string"
-            },
-            "dscelularre": {
-                type:"string"
-            },
-            "dscorreopre": {
-                type:"string"
-            },
-            "cuenta": {
-                type:"string"
-            },
-            "option_cuenta": {
-                type:"array"
-            },
-            "agente": {
-                type:"string"
-            },
-            "option_agente": {
-                type:"array"
-            },
-            "valorMinimo": {
-                type:"boolean"
-            },
+        // fmiddlewares.validateItem({
+        //     "eneable": {
+        //         type:"boolean"
+        //     },
+        //     "user": {
+        //         type:"string"
+        //     },
+        //     "password": {
+        //         type:"string"
+        //     },
+        //     "dsnitre": {
+        //         type:"string"
+        //     },
+        //     "dsdirre": {
+        //         type:"string"
+        //     },
+        //     "dstelre": {
+        //         type:"string"
+        //     },
+        //     "dscelularre": {
+        //         type:"string"
+        //     },
+        //     "dscorreopre": {
+        //         type:"string"
+        //     },
+        //     "cuenta": {
+        //         type:"string"
+        //     },
+        //     "option_cuenta": {
+        //         type:"array"
+        //     },
+        //     "agente": {
+        //         type:"string"
+        //     },
+        //     "option_agente": {
+        //         type:"array"
+        //     },
+        //     "valorMinimo": {
+        //         type:"boolean"
+        //     },
         
-        })
+        // })
     ],
     config.save
 )
