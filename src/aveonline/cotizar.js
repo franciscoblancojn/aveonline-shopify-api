@@ -73,7 +73,7 @@ const cotizar = async ({ config, checkout }) => {
     const data = {
         tipo: "cotizarDoble",
         access: "",
-        token: getToken({ config }),
+        token: await getToken({ config }),
         idempresa: config.cuenta,
         origen: origen.idciudad,
         destino: "MEDELLIN(ANTIOQUIA)", //pendiente
