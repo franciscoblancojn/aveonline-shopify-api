@@ -20,15 +20,7 @@ const getShipping = async (req,res) => {
         console.log(cotizacion);
 
         res.send({
-            "rates": [
-                {
-                    "service_name": "Aveonline",
-                    "service_code": "Aveonline",
-                    "total_price": "1000000",
-                    "description": "This is the fastest option by far",
-                    "currency": "COP"
-                }
-            ]
+            "rates": cotizacion
         })
    } catch (error) {
        console.log(error);
