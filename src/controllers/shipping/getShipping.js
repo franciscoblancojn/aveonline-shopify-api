@@ -1,5 +1,6 @@
 require("module-alias/register");
 const db = require("@app/db");
+const {cotizar} = require("@aveonline/cotizar");
 
 const getShipping = async (req,res) => {
    try {
@@ -12,6 +13,10 @@ const getShipping = async (req,res) => {
             throw new Error("Invalid Shop")
         }
         const config = shop.config
+        const checkout = req.body
+
+        const cotizacion = cotizar({config,checkout})
+
         res.send({
             "rates": [
                 {
