@@ -83,6 +83,7 @@ const cotizar = async ({ config, checkout }) => {
         productos: products, //pendiente
         valorMinimo: config.valorMinimo ? 1 : 0,
     };
+    console.log(data);
     const result = await request({
         method: "POST",
         url: "https://aveonline.co/api/nal/v1.0/generarGuiaTransporteNacional.php",
