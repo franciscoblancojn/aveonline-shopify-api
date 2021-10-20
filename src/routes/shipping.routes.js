@@ -21,7 +21,6 @@ router.post(
 router.post(
     "/",
     [
-        apiKey,
         fmiddlewares.validateItem({
             shop:{
                 type:"string"
