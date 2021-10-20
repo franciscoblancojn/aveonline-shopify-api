@@ -5,6 +5,7 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const routes = require('@routes/_index.routes')
+const cors = require('cors')
 
 /**
  * @description port and rute
@@ -15,6 +16,9 @@ const port = 3001
  * @description load app
  */
 const app = express()
+app.use(cors({
+  origin: '*'
+}))
 app.set('port', port)
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({ extended: true }))
