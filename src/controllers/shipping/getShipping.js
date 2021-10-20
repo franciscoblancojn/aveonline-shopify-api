@@ -1,6 +1,6 @@
 require("module-alias/register");
 const db = require("@app/db");
-const {cotizar} = require("@aveonline/cotizar");
+const {cotizar} = require("@aveonline/_index");
 
 const getShipping = async (req,res) => {
    try {
