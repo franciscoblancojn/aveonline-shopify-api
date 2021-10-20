@@ -13,7 +13,7 @@ const getShipping = async (req,res) => {
             throw new Error("Invalid Shop")
         }
         const config = shop.config
-        const checkout = req.body
+        const checkout = req.body.rate
 
         const cotizacion = cotizar({config,checkout})
 

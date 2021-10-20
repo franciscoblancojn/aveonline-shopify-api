@@ -3,7 +3,7 @@ const request = require("@functions/request");
 const getToken = require("@aveonline/getToken");
 
 const cotizar = async ({config,checkout}) => {
-    console.log({config,checkout});
+    console.log(checkout);
     const data = {
         "tipo"          : "cotizarDoble",
         "access"        : "",
