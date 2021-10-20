@@ -95,10 +95,10 @@ const cotizar = async ({ config, checkout }) => {
     if(result.type === "ok" && result.status === "ok"){
         return result.cotizaciones.map((e)=>{
             return {
-                "service_name": `Aveonline ${e.nombreTransportadora} ${e.contraentrega && " - Contraentrega" }`,
+                "service_name": `Aveonline ${e.nombreTransportadora} ${e.contraentrega ? " - Contraentrega" : ""}`,
                 "service_code": `ave_${e.codTransportadora}`,
                 "total_price": `${e.total}00`,
-                "description": `<img src="${e.logoTransportadora}" alt="${e.nombreTransportadora}" />`,
+                "description": "Metodo de Envio de Aveonline",
                 "currency": "COP"
             }
         })
