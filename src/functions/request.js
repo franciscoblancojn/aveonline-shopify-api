@@ -7,7 +7,7 @@ module.exports = async (config) => {
         const data = response.data
         return {
             type:"ok",
-            data
+            ...data
         }
     } catch (error) {
         return {
