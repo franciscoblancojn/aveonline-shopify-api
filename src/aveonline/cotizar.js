@@ -54,8 +54,8 @@ const exampleCheckouts = {
 };
 
 const cotizar = async ({ config, checkout }) => {
-    if (checkout.currency !== "COP" || checkout.destination.country !== "CO") {
-        return null;
+    if (checkout.currency !== "COP" || (checkout.destination || {}).country !== "CO") {
+        return [];
     }
     var valorrecaudo = 0;
     const products = checkout.items.map((e) => {

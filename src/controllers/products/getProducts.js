@@ -14,7 +14,11 @@ const getProducts = async (req,res) => {
         }
         const productsApi = shop.products || []
         const token = shop.token
-        const productsShopify = await products.get(shop)
+        const responde = await products.get(shop)
+        if(responde.type !== "ok"){
+            throw new Error(responde)
+        }
+        const productsShopify = responde.data
         const productsShopifyMap = productsShopify.map((e)=>{
             return {
                 id : e.id,
