@@ -7,9 +7,16 @@ const getProducts = async (req,res) => {
             query:req.query,
             table:"shops"
         })
+        const shop = result[0]
+        if(!shop){
+            throw new Error("Invalid Shop")
+        }
+        const products = shop.products || []
+        const token = shop.token
         res.send({
             type:"ok",
-            result
+            products,
+            token,
         })
     } catch (error) {
         res.status(500).send({
