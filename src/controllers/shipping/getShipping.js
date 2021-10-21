@@ -14,7 +14,7 @@ const getShipping = async (req,res) => {
         }
         const config = shop.config
         const checkout = req.body.rate
-
+        console.log(checkout);
         const cotizacion = await cotizar({config,checkout})
 
         console.log(cotizacion);
