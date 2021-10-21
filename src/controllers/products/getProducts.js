@@ -13,7 +13,6 @@ const getProducts = async (req,res) => {
             throw new Error("Invalid Shop")
         }
         const productsApi = shop.products || []
-        const token = shop.token
         const responde = await products.get(shop)
         if(responde.type !== "ok"){
             throw new Error(responde)
@@ -30,16 +29,14 @@ const getProducts = async (req,res) => {
                         title : ele.title,
                         sku : ele.sku,
                         admin_graphql_api_id : ele.admin_graphql_api_id,
+                        ...productsApi.find((element)=>ele.id === element.id)
                     }
                 })
             }
         })
         res.send({
             type:"ok",
-            productsApi,
-            token,
-            productsShopify,
-            productsShopifyMap
+            products:productsShopifyMap
         })
     } catch (error) {
         res.status(500).send({
