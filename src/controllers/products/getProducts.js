@@ -1,5 +1,6 @@
 require("module-alias/register");
 const db = require("@app/db");
+const {products} = require("@shopify/_index");
 
 const getProducts = async (req,res) => {
     try {
@@ -11,12 +12,14 @@ const getProducts = async (req,res) => {
         if(!shop){
             throw new Error("Invalid Shop")
         }
-        const products = shop.products || []
+        const productsApi = shop.products || []
         const token = shop.token
+        const productsShopify = await products.get(shop)
         res.send({
             type:"ok",
-            products,
+            productsApi,
             token,
+            productsShopify,
         })
     } catch (error) {
         res.status(500).send({
