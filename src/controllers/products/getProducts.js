@@ -18,6 +18,7 @@ const getProducts = async (req,res) => {
         if(responde.type !== "ok"){
             throw new Error(responde)
         }
+        console.log(responde);
         const productsShopify = responde.data
         const productsShopifyMap = productsShopify.map((e)=>{
             return {
