@@ -1,5 +1,6 @@
 require('module-alias/register')
 
 module.exports = { 
-    save : require('@controllers/products/saveProducts')
+    get : require('@controllers/products/getProducts'),
+    save : require('@controllers/products/saveProducts'),
 }
