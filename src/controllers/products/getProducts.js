@@ -15,11 +15,27 @@ const getProducts = async (req,res) => {
         const productsApi = shop.products || []
         const token = shop.token
         const productsShopify = await products.get(shop)
+        const productsShopifyMap = productsShopify.map((e)=>{
+            return {
+                id : e.id,
+                title : e.title,
+                admin_graphql_api_id : e.admin_graphql_api_id,
+                variants : e.variants.map((ele)=>{
+                    return{
+                        id : ele.id,
+                        title : ele.title,
+                        sku : ele.sku,
+                        admin_graphql_api_id : ele.admin_graphql_api_id,
+                    }
+                })
+            }
+        })
         res.send({
             type:"ok",
             productsApi,
             token,
             productsShopify,
+            productsShopifyMap
         })
     } catch (error) {
         res.status(500).send({
