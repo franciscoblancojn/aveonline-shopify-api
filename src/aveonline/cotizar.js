@@ -59,11 +59,15 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
     }
     var valorrecaudo = 0;
     const products = checkout.items.map((e) => {
-        valorrecaudo += e.quantity * e.price;
-        const {weigth,width,height,length,cotizar} = productsShopify.find((e)=>e.id==e.variant_id)
+        const proudctShopify =  productsShopify.find((e)=>e.id==e.variant_id)
+        if(!proudctShopify){
+            throw new Error("No valido para Cotizar")
+        }
+        const {weigth,width,height,length,cotizar} = proudctShopify
         if(!cotizar){
             throw new Error("No valido para Cotizar")
         }
+        valorrecaudo += e.quantity * e.price;
         return {
             alto: height, //pendiente
             largo: length, //pendiente
