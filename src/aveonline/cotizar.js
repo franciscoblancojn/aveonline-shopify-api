@@ -54,20 +54,25 @@ const exampleCheckouts = {
 };
 
 const cotizar = async ({ config, checkout, productsShopify }) => {
-    if (checkout.currency !== "COP" || (checkout.destination || {}).country !== "CO") {
+    if (
+        checkout.currency !== "COP" ||
+        (checkout.destination || {}).country !== "CO"
+    ) {
         return [];
     }
     var valorrecaudo = 0;
     const products = checkout.items.map((e) => {
         console.log(productsShopify);
-        const proudctShopify =  productsShopify.find((ele)=>ele.id==e.variant_id)
+        const proudctShopify = productsShopify.find(
+            (ele) => ele.id == e.variant_id
+        );
         console.log(proudctShopify);
-        if(!proudctShopify){
-            throw new Error("No valido para Cotizar")
+        if (!proudctShopify) {
+            throw new Error("No valido para Cotizar");
         }
-        const {weigth,width,height,length} = proudctShopify
-        if(!proudctShopify.cotizar){
-            throw new Error("No valido para Cotizar")
+        const { weigth, width, height, length } = proudctShopify;
+        if (!proudctShopify.cotizar) {
+            throw new Error("No valido para Cotizar");
         }
         valorrecaudo += e.quantity * e.price;
         return {
@@ -100,19 +105,21 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
         headers: {
             "Content-Type": "application/json",
         },
-        data
+        data,
     });
-    if(result.type === "ok" && result.status === "ok"){
-        return result.cotizaciones.map((e)=>{
+    if (result.type === "ok" && result.status === "ok") {
+        return result.cotizaciones.map((e) => {
             return {
-                "service_name": `Aveonline ${e.nombreTransportadora} ${e.contraentrega ? " - Contraentrega" : ""}`,
-                "service_code": `ave_${e.codTransportadora}`,
-                "total_price": `${e.total}00`,
-                "description": "Metodo de Envio de Aveonline",
-                "currency": "COP"
-            }
-        })
+                service_name: `Aveonline ${e.nombreTransportadora} ${
+                    e.contraentrega ? " - Contraentrega" : ""
+                }`,
+                service_code: `ave_${e.codTransportadora}`,
+                total_price: `${e.total}00`,
+                description: "Metodo de Envio de Aveonline",
+                currency: "COP",
+            };
+        });
     }
-    return []
+    return [];
 };
 module.exports = cotizar;
