@@ -53,18 +53,22 @@ const exampleCheckouts = {
     locale: "es",
 };
 
-const cotizar = async ({ config, checkout }) => {
+const cotizar = async ({ config, checkout, productsShopify }) => {
     if (checkout.currency !== "COP" || (checkout.destination || {}).country !== "CO") {
         return [];
     }
     var valorrecaudo = 0;
     const products = checkout.items.map((e) => {
         valorrecaudo += e.quantity * e.price;
+        const {weigth,width,height,length,cotizar} = productsShopify.find((e)=>e.id==e.variant_id)
+        if(!cotizar){
+            throw new Error("No valido para Cotizar")
+        }
         return {
-            alto: 1, //pendiente
-            largo: 1, //pendiente
-            ancho: 1, //pendiente
-            peso: e.grams / 1000,
+            alto: height, //pendiente
+            largo: length, //pendiente
+            ancho: width, //pendiente
+            peso: weigth,
             unidades: e.quantity,
             valorDeclarado: e.price, //pendiente  valor declarado custom
         };

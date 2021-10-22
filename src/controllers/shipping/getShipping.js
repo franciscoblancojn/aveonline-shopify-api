@@ -13,9 +13,10 @@ const getShipping = async (req,res) => {
             throw new Error("Invalid Shop")
         }
         const config = shop.config
+        const productsShopify = shop.products
         const checkout = req.body.rate
         console.log(checkout);
-        const cotizacion = await cotizar({config,checkout})
+        const cotizacion = await cotizar({config,checkout,productsShopify})
 
         console.log(cotizacion);
 
