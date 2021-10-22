@@ -62,26 +62,24 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
     }
     var valorrecaudo = 0;
     const products = checkout.items.map((e) => {
-        console.log(productsShopify);
         const proudctShopify = productsShopify.find(
             (ele) => ele.id == e.variant_id
         );
-        console.log(proudctShopify);
         if (!proudctShopify) {
             throw new Error("No valido para Cotizar");
         }
-        const { weigth, width, height, length } = proudctShopify;
+        const { weigth, width, height, length, valorDeclarado } = proudctShopify;
         if (!proudctShopify.cotizar) {
             throw new Error("No valido para Cotizar");
         }
         valorrecaudo += e.quantity * e.price;
         return {
-            alto: height, //pendiente
-            largo: length, //pendiente
-            ancho: width, //pendiente
+            alto: height, 
+            largo: length, 
+            ancho: width, 
             peso: weigth,
             unidades: e.quantity,
-            valorDeclarado: e.price, //pendiente  valor declarado custom
+            valorDeclarado: (valorDeclarado == undefined || valorDeclarado == null || valorDeclarado == "") ? e.price : valorDeclarado, //pendiente  valor declarado custom
         };
     });
     const origen = config.option_agente.find((e) => e.value == config.agente);
