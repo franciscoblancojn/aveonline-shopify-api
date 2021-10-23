@@ -7,5 +7,6 @@ router.use('/shipping', require('@app/routes/shipping.routes'))
 router.use('/tokens', require('@app/routes/tokens.routes'))
 router.use('/shop', require('@app/routes/shop.routes'))
 router.use('/products', require('@app/routes/products.routes'))
+router.use('/scripts', require('@app/routes/scripts.routes'))
 
 module.exports = router
