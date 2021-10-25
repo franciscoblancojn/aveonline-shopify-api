@@ -30,7 +30,10 @@ const getShipping = async (req, res) => {
                 where: req.query,
                 data: {
                     $push: {
-                        errorCotizar : error
+                        errorCotizar : {
+                            date : (new Date()).getTime(),
+                            ...error
+                        }
                     },
                 },
                 options: {
