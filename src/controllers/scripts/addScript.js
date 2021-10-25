@@ -22,8 +22,10 @@ const addScript = async (req,res) => {
             const r = await scripts.post({
                 ...shop,
                 data:{
-                    event:"order_status",
-                    src:"https://aveonline.startscoinc.com/api/v1/public/js/checkout.js"
+                    script_tag:{
+                        event:"order_status",
+                        src:"https://aveonline.startscoinc.com/api/v1/public/js/checkout.js"
+                    }
                 }
             })
             res.send({
