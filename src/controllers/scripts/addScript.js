@@ -13,8 +13,22 @@ const addScript = async (req,res) => {
             throw new Error("Invalid Shop")
         }
         const respond = await scripts.get(shop)
+        if(respond.type !== "ok"){
+            throw new Error("No se puede leer los Scripts")
+        }
+        const {script_tags} = respond
+        if(1===1){
+            await scripts.post({
+                ...shop,
+                data:{
+                    event:"order_status",
+                    src:""
+                }
+            })
+
+        }
         res.send({
-            respond
+            script_tags
         })
     } catch (error) {
         res.status(500).send({
