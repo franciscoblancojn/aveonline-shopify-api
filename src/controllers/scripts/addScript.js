@@ -26,8 +26,7 @@ const addScript = async (req,res) => {
                 data:{
                     script_tag:{
                         event:"onload",
-                        display_scope: "order_status",
-                        cache: false,
+                        display_scope: "all",
                         src
                     }
                 }
