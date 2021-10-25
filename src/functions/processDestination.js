@@ -8487,6 +8487,7 @@ const processDestination = (destination) => {
     if(!validateDestination(des)){
         throw {
             type:"Error Cotizando",
+            destination,
             msj:`Usuario ${destination.name}, Destino Invalido ${destination.city}(${destination.province})`
         }
     }

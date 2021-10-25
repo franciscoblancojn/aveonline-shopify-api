@@ -25,6 +25,20 @@ const getShipping = async (req, res) => {
         });
     } catch (error) {
         console.log(error);
+        if(error.type === 'Error Cotizando'){
+            const saveError = await db.put({
+                where: req.query,
+                data: {
+                    $push: {
+                        errorCotizar : error
+                    },
+                },
+                options: {
+                    upsert: true,
+                },
+                table: `shops`,
+            });
+        }
         res.status(500).send({
             type: "error",
             msj: `${error}`,
