@@ -35,6 +35,7 @@ const addScript = async (req,res) => {
             return res.send(r)
         }
         res.send({
+            "type": "ok",
             script_tags
         })
     } catch (error) {
