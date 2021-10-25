@@ -8480,7 +8480,7 @@ const validateDestination= (des) => {
         "ZUNGO EMBARCADERO - PUEBLO NUEVO(ANTIOQUIA)",
     ]
     if(!desValides.includes(des)){
-        throw new Error(`Destino Invalido "${city}"`)
+        throw new Error(`Destino Invalido "${des}"`)
     }
 }
 const processDestination = (destination) => {
