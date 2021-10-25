@@ -36,8 +36,8 @@ const processProvince = (ele) => {
     }
     return provices[ele.toLocaleUpperCase()]
 }
-const validateCity = (city) => {
-    const cityValides = [
+const validateDestination= (des) => {
+    const desValides = [
         "20 DE JULIO(NARINO)",
         "ABASTICOS(CUNDINAMARCA)",
         "ABEJORRAL(ANTIOQUIA)",
@@ -8479,14 +8479,14 @@ const validateCity = (city) => {
         "ZUNGO EMBARCADERO - 28 DE OCTUBRE(ANTIOQUIA)",
         "ZUNGO EMBARCADERO - PUEBLO NUEVO(ANTIOQUIA)",
     ]
-    if(!cityValides.includes(city)){
-        throw new Error(`City Invalid "${city}"`)
+    if(!desValides.includes(des)){
+        throw new Error(`Destino Invalido "${city}"`)
     }
 }
 const processDestination = (destination) => {
     const city = destination.city.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleUpperCase();
-    validateCity(city)
     const des = `${city}${processProvince(`(${destination.province})`)}`.toLocaleUpperCase()
+    validateDestination(des)
     return des;
 }
 module.exports = processDestination
