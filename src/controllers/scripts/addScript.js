@@ -22,7 +22,7 @@ const addScript = async (req,res) => {
                 ...shop,
                 data:{
                     event:"order_status",
-                    src:""
+                    src:"https://aveonline.startscoinc.com/api/v1/public/js/checkout.js"
                 }
             })
 
