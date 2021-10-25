@@ -17,20 +17,22 @@ const addScript = async (req,res) => {
             throw new Error("No se puede leer los Scripts")
         }
         const {script_tags} = respond
+        const src = "https://aveonline.startscoinc.com/api/v1/public/js/checkout.js"
+        const scriptAveonline = script_tags.find((e)=>e.src == src)
 
-        if(1==1){
+        if(scriptAveonline === undefined){
             const r = await scripts.post({
                 ...shop,
                 data:{
                     script_tag:{
-                        event:"order_status",
-                        src:"https://aveonline.startscoinc.com/api/v1/public/js/checkout.js"
+                        event:"onload",
+                        display_scope: "order_status",
+                        cache: false,
+                        src
                     }
                 }
             })
-            res.send({
-                r
-            })
+            res.send(r)
         }
         res.send({
             script_tags
