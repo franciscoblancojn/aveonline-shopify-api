@@ -8479,14 +8479,14 @@ const validateDestination= (des) => {
         "ZUNGO EMBARCADERO - 28 DE OCTUBRE(ANTIOQUIA)",
         "ZUNGO EMBARCADERO - PUEBLO NUEVO(ANTIOQUIA)",
     ]
-    if(!desValides.includes(des)){
-        throw new Error(`Destino Invalido "${des}"`)
-    }
+    return desValides.includes(des)
 }
 const processDestination = (destination) => {
     const city = destination.city.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleUpperCase();
     const des = `${city}${processProvince(`(${destination.province})`)}`.toLocaleUpperCase()
-    validateDestination(des)
+    if(!validateDestination(des)){
+        throw new Error(`Usuario ${destination.name}, Destino Invalido ${destination.city}(${destination.province})`)
+    }
     return des;
 }
 module.exports = processDestination
