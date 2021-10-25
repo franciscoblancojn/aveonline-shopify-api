@@ -8485,7 +8485,10 @@ const processDestination = (destination) => {
     const city = destination.city.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleUpperCase();
     const des = `${city}${processProvince(`(${destination.province})`)}`.toLocaleUpperCase()
     if(!validateDestination(des)){
-        throw new Error(`Usuario ${destination.name}, Destino Invalido ${destination.city}(${destination.province})`)
+        throw {
+            type:"Error Cotizando",
+            msj:`Usuario ${destination.name}, Destino Invalido ${destination.city}(${destination.province})`
+        }
     }
     return des;
 }
