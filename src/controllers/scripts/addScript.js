@@ -1,4 +1,5 @@
 require("module-alias/register");
+const db = require("@app/db");
 const {scripts} = require("@shopify/_index");
 
 const addScript = async (req,res) => {
