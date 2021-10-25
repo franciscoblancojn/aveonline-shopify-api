@@ -40,7 +40,7 @@ app.use('/api/v1', routes)
 /**
  * use folder page for rutes not enpoints
  */
-app.use(express.static(path.join(__dirname, 'page')))
+app.use('/api/v1/public',express.static(path.join(__dirname, 'page')))
 
 /**
  * app.listen
