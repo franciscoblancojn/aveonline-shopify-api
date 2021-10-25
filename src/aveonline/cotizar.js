@@ -1,6 +1,7 @@
 require("module-alias/register");
 const request = require("@functions/request");
 const getToken = require("@aveonline/getToken");
+const processCity = require("@functions/processCity");
 
 const exampleCheckouts = {
     origin: {
@@ -60,6 +61,7 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
     ) {
         return [];
     }
+    const destino = processCity(checkout.destination.city)
     var valorrecaudo = 0;
     const products = checkout.items.map((e) => {
         const proudctShopify = productsShopify.find(
@@ -79,7 +81,7 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
             ancho: width, 
             peso: weigth,
             unidades: e.quantity,
-            valorDeclarado: (valorDeclarado == undefined || valorDeclarado == null || valorDeclarado == "") ? e.price : valorDeclarado, //pendiente  valor declarado custom
+            valorDeclarado: (valorDeclarado == undefined || valorDeclarado == null || valorDeclarado == "") ? e.price : valorDeclarado, 
         };
     });
     const origen = config.option_agente.find((e) => e.value == config.agente);
@@ -89,11 +91,11 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
         token: await getToken({ config }),
         idempresa: config.cuenta,
         origen: origen.idciudad,
-        destino: "MEDELLIN(ANTIOQUIA)", //pendiente
+        destino,// "MEDELLIN(ANTIOQUIA)", //pendiente
         idasumecosto: 1,
         contraentrega: 1,
         valorrecaudo: valorrecaudo,
-        productos: products, //pendiente
+        productos: products, 
         valorMinimo: config.valorMinimo ? 1 : 0,
     };
     console.log(data);
