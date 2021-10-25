@@ -17,7 +17,7 @@ const addScript = async (req,res) => {
             throw new Error("No se puede leer los Scripts")
         }
         const {script_tags} = respond
-        if(1===1){
+        if(1===2){
             await scripts.post({
                 ...shop,
                 data:{
