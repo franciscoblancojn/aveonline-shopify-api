@@ -11,9 +11,9 @@ const addScript = async (req,res) => {
         if(!shop){
             throw new Error("Invalid Shop")
         }
-        const result = await scripts.get(shop)
+        const respond = await scripts.get(shop)
         res.send({
-            result
+            respond
         })
     } catch (error) {
         res.status(500).send({
