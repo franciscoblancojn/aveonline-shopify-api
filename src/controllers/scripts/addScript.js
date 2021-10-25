@@ -32,7 +32,7 @@ const addScript = async (req,res) => {
                     }
                 }
             })
-            res.send(r)
+            return res.send(r)
         }
         res.send({
             script_tags
