@@ -3,7 +3,15 @@ const {scripts} = require("@shopify/_index");
 
 const addScript = async (req,res) => {
     try {
-        const result = await scripts.get()
+        const result = await db.get({
+            query:req.query,
+            table:"shops"
+        })
+        const shop = result[0]
+        if(!shop){
+            throw new Error("Invalid Shop")
+        }
+        const result = await scripts.get(shop)
         res.send({
             result
         })
