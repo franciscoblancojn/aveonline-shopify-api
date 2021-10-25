@@ -1,7 +1,7 @@
 require("module-alias/register");
 const request = require("@functions/request");
 const getToken = require("@aveonline/getToken");
-const processCity = require("@functions/processCity");
+const processDestination = require("@functions/processDestination");
 
 const exampleCheckouts = {
     origin: {
@@ -61,7 +61,7 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
     ) {
         return [];
     }
-    const destino = processCity(checkout.destination.city)
+    const destino = processDestination(checkout.destination)
     var valorrecaudo = 0;
     const products = checkout.items.map((e) => {
         const proudctShopify = productsShopify.find(
