@@ -12,10 +12,10 @@ const addEnventCreate = async (req,res) => {
         if(!shop){
             throw new Error("Invalid Shop")
         }
-
+        const result = await webhooks.get(shop)
         res.send({
             type:"ok",
-            shop
+            result
         })
     } catch (error) {
         console.log(error);
