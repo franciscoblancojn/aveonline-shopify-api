@@ -11,6 +11,7 @@ const saveOrder = async (req,res) => {
         if(!shop){
             throw new Error("Invalid Shop")
         }
+        console.log(req.body);
         res.send({
             type:"ok",
             shop

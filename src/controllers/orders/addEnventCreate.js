@@ -13,9 +13,35 @@ const addEnventCreate = async (req,res) => {
             throw new Error("Invalid Shop")
         }
         const respond = await webhooks.get(shop)
+        if(respond.type!=="ok"){
+            throw respond
+        }
+        const listWebHooks = respond.webhooks
+
+        const urlSaveOrder = `https://aveonline.startscoinc.com/api/v1/orders/save?shop=${shop.shop}`
+
+        const webHook = listWebHooks.find((e)=>e.address == urlSaveOrder)
+
+        if(webHook === undefined){
+            webhooks.post({
+                ...shop,
+                data:{
+                    webhook:{
+                        topic:"orders/create",
+                        address:urlSaveOrder,
+                        format:"json",
+                    }
+                }
+            })
+            return res.send({
+                type:"ok",
+                msj:"webHooks save"
+            })
+        }
+        
         res.send({
             type:"ok",
-            respond
+            listWebHooks
         })
     } catch (error) {
         console.log(error);
