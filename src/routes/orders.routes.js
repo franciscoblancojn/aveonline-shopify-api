@@ -21,4 +21,17 @@ router.get(
     orders.get
 )
 
+router.post(
+    "/envent/create",
+    [
+        apiKey,
+        fmiddlewares.validateItem({
+            exactItems:true,
+            "shop": {
+                type:"string"
+            },   
+        },"query"),
+    ],
+    orders.addEnventCreate
+)
 module.exports = router
