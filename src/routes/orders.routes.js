@@ -22,6 +22,18 @@ router.get(
 )
 
 router.post(
+    "/save",
+    [
+        fmiddlewares.validateItem({
+            exactItems:true,
+            "shop": {
+                type:"string"
+            },   
+        },"query"),
+    ],
+    orders.save
+)
+router.post(
     "/envent/create",
     [
         apiKey,
