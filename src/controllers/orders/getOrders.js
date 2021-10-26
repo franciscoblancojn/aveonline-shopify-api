@@ -16,9 +16,10 @@ const getOrders = async (req,res) => {
         if(responde.type !== "ok"){
             throw responde
         }
+        const orders = responde.orders.filter((e)=>e.shipping_lines.find((ele)=>ele.source=="Aveonline")!==undefined)
         res.send({
             type:"ok",
-            responde
+            orders
         })
     } catch (error) {
         console.log(error);
