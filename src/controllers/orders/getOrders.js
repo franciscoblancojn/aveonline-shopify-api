@@ -19,7 +19,8 @@ const getOrders = async (req,res) => {
         const ordersR = responde.orders.filter((e)=>e.shipping_lines.find((ele)=>ele.source=="Aveonline")!==undefined)
         res.send({
             type:"ok",
-            orders:ordersR
+            orders:ordersR,
+            responde,
         })
     } catch (error) {
         console.log(error);
