@@ -266,8 +266,27 @@ const exampleOrder = {
     ],
 };
 
-const generateGuia = async ({ config, order }) => {
+const generateGuia = async ({ config, order, products, shop }) => {
     const origen = config.option_agente.find((e) => e.value == config.agente);
+    const productsOrder = []
+    var dscontenido = ""
+    order.line_items.foreach((productOrder)=>{
+        const product = products.find((ele)=>ele.id==productOrder.variant_id)
+        if(product){
+            productsOrder.push({
+                "alto"              : product.height,
+                "largo"             : product.length,
+                "ancho"             : product.width, 
+                "peso"              : product.weigth, 
+                "unidades"          : productOrder.quantity,
+                "nombre"            : product.title,
+                "ref"               : product.sku,
+                "urlProducto"       : `https://${shop}/admin/products/${product.id}`,
+                "valorDeclarado"    : (product.valorDeclarado == undefined || product.valorDeclarado == null || product.valorDeclarado == "") ? productOrder.price : product.valorDeclarado
+            })
+            dscontenido += product.title+","
+        }
+    })
     const json = {
         "tipo"              : "generarGuia2",
         "token"             : await getToken({ config }),
@@ -299,9 +318,9 @@ const generateGuia = async ({ config, order }) => {
         "idtransportador"   : $data['idtransportador'],//pendiente
 
         "unidades"          : 1,
-        "productos"         : $productos,//pendiente
+        "productos"         : productsOrder,
 
-        "dscontenido"       : $dscontenido,//pendiente
+        "dscontenido"       : dscontenido,
         "dscom"             : order.note,
 
         "idasumecosto"      : $data['idasumecosto'],//pendiente

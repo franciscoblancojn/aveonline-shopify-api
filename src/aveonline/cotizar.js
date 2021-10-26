@@ -91,7 +91,7 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
         token: await getToken({ config }),
         idempresa: config.cuenta,
         origen: origen.idciudad,
-        destino,// "MEDELLIN(ANTIOQUIA)", //pendiente
+        destino,
         idasumecosto: 1,
         contraentrega: 1,
         valorrecaudo: valorrecaudo,
