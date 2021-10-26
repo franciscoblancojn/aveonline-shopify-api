@@ -20,7 +20,6 @@ const getOrders = async (req,res) => {
         res.send({
             type:"ok",
             orders:ordersR,
-            responde,
         })
     } catch (error) {
         console.log(error);
