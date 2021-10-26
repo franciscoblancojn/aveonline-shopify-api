@@ -21,6 +21,7 @@ const getOrders = async (req,res) => {
             responde
         })
     } catch (error) {
+        console.log(error);
         res.status(500).send({
             type:"error",
             msj:`${error}`,
