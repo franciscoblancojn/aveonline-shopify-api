@@ -14,7 +14,7 @@ const getOrders = async (req,res) => {
         }
         const responde = await orders.get(shop)
         if(responde.type !== "ok"){
-            throw new Error(responde)
+            throw responde
         }
         res.send({
             type:"ok",
