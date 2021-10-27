@@ -109,11 +109,15 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
     });
     if (result.type === "ok" && result.status === "ok") {
         return result.cotizaciones.map((e) => {
+            const requestJson = Buffer.from(JSON.stringify({
+                ...data,
+                ...e
+            })).toString('base64')
             return {
                 service_name: `Aveonline ${e.nombreTransportadora} ${
                     e.contraentrega ? " - Contraentrega" : ""
                 }`,
-                service_code: `ave_${e.codTransportadora}`,
+                service_code: `ave_${e.codTransportadora}_${requestJson}`,
                 total_price: `${e.total}00`,
                 description: "Metodo de Envio de Aveonline",
                 currency: "COP",

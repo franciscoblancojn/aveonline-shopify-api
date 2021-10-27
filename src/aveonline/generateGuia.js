@@ -290,7 +290,7 @@ const generateGuia = async ({ config, order, products, shop }) => {
     const json = {
         "tipo"              : "generarGuia2",
         "token"             : await getToken({ config }),
-        idempresa           : config.cuenta,
+        "idempresa"         : config.cuenta,
         "codigo"            : "",
         "dsclavex"          : "",
         "plugin"            : "shopify",
