@@ -267,6 +267,12 @@ const exampleOrder = {
 };
 
 const generateGuia = async ({ config, order, products, shop }) => {
+    const shipping_lines = order.shipping_lines.find((e)=>e.source=="Aveonline")
+    if(!shipping_lines){
+        throw new Error("shipping_lines invalid")
+    }
+    const requestJson = JSON.parse(Buffer.from(shipping_lines.split("_")[2], 'base64').toString('ascii'))
+    console.log(requestJson);
     const origen = config.option_agente.find((e) => e.value == config.agente);
     const productsOrder = []
     var dscontenido = ""
