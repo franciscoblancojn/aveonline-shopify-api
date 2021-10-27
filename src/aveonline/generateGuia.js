@@ -271,7 +271,7 @@ const generateGuia = async ({ config, order, products, shop }) => {
     if(!shipping_lines){
         throw new Error("shipping_lines invalid")
     }
-    const requestJson = JSON.parse(Buffer.from(shipping_lines.split("_")[2], 'base64').toString('ascii'))
+    const requestJson = JSON.parse(Buffer.from(shipping_lines.code.split("_")[2], 'base64').toString('ascii'))
     console.log(requestJson);
     const origen = config.option_agente.find((e) => e.value == config.agente);
     const productsOrder = []
