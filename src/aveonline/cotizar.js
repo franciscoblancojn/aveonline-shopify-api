@@ -108,6 +108,7 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
         data,
     });
     if (result.type === "ok" && result.status === "ok") {
+        delete data.token;
         return result.cotizaciones.map((e) => {
             const requestJson = Buffer.from(JSON.stringify({
                 ...data,
