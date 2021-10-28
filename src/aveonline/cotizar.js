@@ -111,8 +111,9 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
         delete data.token;
         return result.cotizaciones.map((e) => {
             const requestJson = Buffer.from(JSON.stringify({
-                ...data,
-                ...e
+                idt:e.codTransportadora,
+                con:e.contraentrega,
+                val:valorrecaudo
             })).toString('base64')
             return {
                 service_name: `Aveonline ${e.nombreTransportadora} ${

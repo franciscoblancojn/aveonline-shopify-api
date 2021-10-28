@@ -273,7 +273,6 @@ const generateGuia = async ({ config, order, products, shop }) => {
     }
     const requestJson64 = shipping_lines.code.split("_")[2]
     const requestJsonS = Buffer.from(requestJson64, 'base64').toString('ascii')
-    console.log(requestJsonS);
     const requestJson = JSON.parse(requestJsonS)
     console.log(requestJson);
     const origen = config.option_agente.find((e) => e.value == config.agente);
@@ -332,7 +331,7 @@ const generateGuia = async ({ config, order, products, shop }) => {
         "dscontenido"       : dscontenido,
         "dscom"             : order.note,
 
-        "idasumecosto"      : $data['idasumecosto'],//pendiente
+        "idasumecosto"      : 1,
         "contraentrega"     : $data['contraentrega'],//pendiente
         "valorrecaudo"      : $data['valorrecaudo'],//pendiente
 
