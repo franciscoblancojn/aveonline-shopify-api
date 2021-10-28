@@ -274,11 +274,12 @@ const generateGuia = async ({ config, order, products, shop }) => {
     const requestJson64 = shipping_lines.code.split("_")[2]
     const requestJsonS = Buffer.from(requestJson64, 'base64').toString('ascii')
     const requestJson = JSON.parse(requestJsonS)
-    console.log(requestJson);
+    
     const origen = config.option_agente.find((e) => e.value == config.agente);
     const productsOrder = []
     var dscontenido = ""
-    order.line_items.foreach((productOrder)=>{
+    for (var i = 0; i < order.line_items.length; i++) {
+        const productOrder = order.line_items[i];
         const product = products.find((ele)=>ele.id==productOrder.variant_id)
         if(product){
             productsOrder.push({
@@ -294,7 +295,8 @@ const generateGuia = async ({ config, order, products, shop }) => {
             })
             dscontenido += product.title+","
         }
-    })
+        
+    }
     const json = {
         "tipo"              : "generarGuia2",
         "token"             : await getToken({ config }),
@@ -307,7 +309,7 @@ const generateGuia = async ({ config, order, products, shop }) => {
         "dsdirre"           : config.dsdirre,
         "dsbarrioo"         : "",
 
-        "destino"           : $data['destinos'],//pendiente
+        "destino"           : requestJson.des,
         "dsdir"             : order.shipping_address.address1,
         "dsbarrio"          : "",
 
@@ -323,7 +325,7 @@ const generateGuia = async ({ config, order, products, shop }) => {
         "dstel"             : order.phone,
         "dscelular"         : order.phone,
 
-        "idtransportador"   : $data['idtransportador'],//pendiente
+        "idtransportador"   : requestJson.idt,
 
         "unidades"          : 1,
         "productos"         : productsOrder,
@@ -332,8 +334,8 @@ const generateGuia = async ({ config, order, products, shop }) => {
         "dscom"             : order.note,
 
         "idasumecosto"      : 1,
-        "contraentrega"     : $data['contraentrega'],//pendiente
-        "valorrecaudo"      : $data['valorrecaudo'],//pendiente
+        "contraentrega"     : (requestJson.con)?1:0,
+        "valorrecaudo"      : requestJson.val,
 
         "idagente"          : config.agente,
         
@@ -347,5 +349,6 @@ const generateGuia = async ({ config, order, products, shop }) => {
         "cartaporte"        : "",
         "valorMinimo"       : (config.valorMinimo)?1:0
     }
+    console.log(json);
 };
 module.exports = generateGuia;

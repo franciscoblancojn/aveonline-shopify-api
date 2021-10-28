@@ -113,7 +113,8 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
             const requestJson = Buffer.from(JSON.stringify({
                 idt:e.codTransportadora,
                 con:e.contraentrega,
-                val:valorrecaudo
+                val:valorrecaudo,
+                des:destino
             })).toString('base64')
             return {
                 service_name: `Aveonline ${e.nombreTransportadora} ${
