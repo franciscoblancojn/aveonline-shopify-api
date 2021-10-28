@@ -1,5 +1,5 @@
 require('module-alias/register')
-var axios = require('axios');
+const axios = require('axios');
 
 module.exports = async (config) => {
     try {

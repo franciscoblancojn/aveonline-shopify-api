@@ -297,7 +297,7 @@ const generateGuia = async ({ config, order, products, shop }) => {
         }
         
     }
-    const json = {
+    const data = {
         "tipo"              : "generarGuia2",
         "token"             : await getToken({ config }),
         "idempresa"         : config.cuenta,
@@ -349,6 +349,16 @@ const generateGuia = async ({ config, order, products, shop }) => {
         "cartaporte"        : "",
         "valorMinimo"       : (config.valorMinimo)?1:0
     }
-    console.log(json);
+    console.log(data);
+    const result = await request({
+        method: "POST",
+        url: "https://aveonline.co/api/nal/v1.0/generarGuiaTransporteNacional.php",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        data,
+    })
+    console.log(result);
+    return result
 };
 module.exports = generateGuia;
