@@ -322,8 +322,8 @@ const generateGuia = async ({ config, order, products, shop }) => {
         "dsnombre"          : order.shipping_address.first_name,
         "dsnombrecompleto"  : order.shipping_address.name,
         "dscorreop"         : order.email,
-        "dstel"             : order.phone,
-        "dscelular"         : order.phone,
+        "dstel"             : order.phone || config.dstelre,
+        "dscelular"         : order.phone || config.dscelularre,
 
         "idtransportador"   : requestJson.idt,
 
