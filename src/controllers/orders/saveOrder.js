@@ -23,13 +23,54 @@ const saveOrder = async (req, res) => {
             ...shop,
             order: req.body
         })
-        console.log(respond);
+        if(respond.status == 'error'){
+            throw {
+                type:"errorGenerarGuia",
+                respond
+            }
+        }
+        const {guia} = respond.resultado
+        delete guia.archivoguia
+        delete guia.archivorotulo
+        const saveGuia = await db.put({
+            where: req.query,
+            data: {
+                $push: {
+                    guias : {
+                        date : (new Date()).getTime(),
+                        ...guia
+                    }
+                },
+            },
+            options: {
+                upsert: true,
+            },
+            table: `shops`,
+        });
+
         res.send({
             type: "ok",
-            respond,
+            saveGuia,
         });
     } catch (error) {
         console.log(error);
+        if(error.type === 'errorGenerarGuia'){
+            const saveError = await db.put({
+                where: req.query,
+                data: {
+                    $push: {
+                        errorGenerarGuia : {
+                            date : (new Date()).getTime(),
+                            ...error
+                        }
+                    },
+                },
+                options: {
+                    upsert: true,
+                },
+                table: `shops`,
+            });
+        }
         res.status(500).send({
             type: "error",
             msj: `${error}`,

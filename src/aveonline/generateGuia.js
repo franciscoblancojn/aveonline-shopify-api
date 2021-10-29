@@ -349,7 +349,6 @@ const generateGuia = async ({ config, order, products, shop }) => {
         "cartaporte"        : "",
         "valorMinimo"       : (config.valorMinimo)?1:0
     }
-    console.log(data);
     const result = await request({
         method: "POST",
         url: "https://aveonline.co/api/nal/v1.0/generarGuiaTransporteNacional.php",
@@ -358,7 +357,6 @@ const generateGuia = async ({ config, order, products, shop }) => {
         },
         data,
     })
-    console.log(result);
     return result
 };
 module.exports = generateGuia;
