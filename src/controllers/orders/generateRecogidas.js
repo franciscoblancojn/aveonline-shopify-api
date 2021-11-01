@@ -2,7 +2,7 @@ require("module-alias/register");
 const db = require("@app/db");
 const { generateRecogidas } = require("@aveonline/_index");
 
-const generateRecogidas = async (req,res) => {
+const generateRecogidasEnpoint = async (req,res) => {
     try {
         const {guias, note} = req.body
         const result = await db.get({
@@ -33,4 +33,4 @@ const generateRecogidas = async (req,res) => {
         })
     }
 }
-module.exports = generateRecogidas
+module.exports = generateRecogidasEnpoint
