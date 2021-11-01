@@ -19,7 +19,17 @@ const generateRecogidasEnpoint = async (req,res) => {
             guias: guiasToGenerateRecoguidas,
             config : shop.config,
         })
-        console.log(recoguidas);
+        if(recoguidas.type!="ok"){
+            throw recoguidas
+        }
+        const newGuias = (shop.guias || []).map((e)=>{
+            if(guias.includes(e.id_order)){
+                e.status = "Generada"
+            }
+            return e
+        })
+        
+
         res.send({
             type:"ok",
             recoguidas
