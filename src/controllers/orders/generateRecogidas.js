@@ -4,7 +4,7 @@ const { generateRecogidas } = require("@aveonline/_index");
 
 const generateRecogidas = async (req,res) => {
     try {
-        const {guias} = req.body
+        const {guias, note} = req.body
         const result = await db.get({
             query:req.query,
             table:"shops"
@@ -14,10 +14,14 @@ const generateRecogidas = async (req,res) => {
             throw new Error("Invalid Shop")
         }
         const guiasToGenerateRecoguidas = (shop.guias || []).filter((e)=>guias.includes(e.id_order))
-        const recoguidas = await generateRecogidas(guiasToGenerateRecoguidas)
+        const recoguidas = await generateRecogidas({
+            note,
+            guias: guiasToGenerateRecoguidas,
+            ...shop,
+        })
+        console.log(recoguidas);
         res.send({
             type:"ok",
-            guiasToGenerateRecoguidas,
             recoguidas
         })
     } catch (error) {

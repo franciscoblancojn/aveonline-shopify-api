@@ -61,6 +61,9 @@ router.post(
             "guias": {
                 type:"array"
             },   
+            "note": {
+                type:"string"
+            },   
         }),
     ],
     orders.generateRecogidas
