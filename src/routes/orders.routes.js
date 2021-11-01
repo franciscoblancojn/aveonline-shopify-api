@@ -46,4 +46,23 @@ router.post(
     ],
     orders.addEnventCreate
 )
+router.post(
+    "/generate-guias",
+    [
+        apiKey,
+        fmiddlewares.validateItem({
+            exactItems:true,
+            "shop": {
+                type:"string"
+            },   
+        },"query"),
+        fmiddlewares.validateItem({
+            exactItems:true,
+            "guias": {
+                type:"array"
+            },   
+        }),
+    ],
+    orders.generateGuias
+)
 module.exports = router
