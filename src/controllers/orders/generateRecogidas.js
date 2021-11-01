@@ -14,12 +14,10 @@ const generateRecogidasEnpoint = async (req,res) => {
             throw new Error("Invalid Shop")
         }
         const guiasToGenerateRecoguidas = (shop.guias || []).filter((e)=>guias.includes(e.id_order))
-        console.log("guias",guias);
-        console.log("guiasToGenerateRecoguidas",guiasToGenerateRecoguidas);
         const recoguidas = await generateRecogidas({
             note,
             guias: guiasToGenerateRecoguidas,
-            ...shop,
+            config : shop.config,
         })
         console.log(recoguidas);
         res.send({
