@@ -13,6 +13,10 @@ const saveOrder = async (req, res) => {
             throw new Error("Invalid Shop");
         }
         const order = req.body;
+        if(shop.guias.find((e)=>e.id_order == order.id)){
+            throw new Error("Guia ya generada")
+        }
+
         const isAveonline = order.shipping_lines.find(
             (ele) => ele.source == "Aveonline"
         );
