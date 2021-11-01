@@ -11,7 +11,7 @@ const getOrders = async (req,res) => {
         if(!shop){
             throw new Error("Invalid Shop")
         }
-        const orders = shop.guias || []
+        const orders = (shop.guias || []).reverse()
         res.send({
             type:"ok",
             orders,
