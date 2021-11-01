@@ -28,11 +28,24 @@ const generateRecogidasEnpoint = async (req,res) => {
             }
             return e
         })
-        
-
+        console.log(newGuias);
+        const saveNewGuias = await db.put({
+            where: req.query,
+            data: {
+                $set: {
+                    guias : newGuias
+                },
+            },
+            options: {
+                upsert: true,
+            },
+            table: `shops`,
+        });
+        console.log(saveNewGuias);
         res.send({
             type:"ok",
-            recoguidas
+            recoguidas,
+            saveNewGuias
         })
     } catch (error) {
         console.log(error);
