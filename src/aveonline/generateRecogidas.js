@@ -9,7 +9,7 @@ const generateRecogidas = async ({config, guias, note}) => {
         "idempresa"         : config.cuenta,
         "idagente"          : config.agente,
         "dscom"             : note,
-        "guias"             : guias
+        "guias"             : guias.map((e)=>e.numguia)
     }
     console.log(data);
     const result = await request({
