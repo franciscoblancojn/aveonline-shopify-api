@@ -47,7 +47,7 @@ router.post(
     orders.addEnventCreate
 )
 router.post(
-    "/generate-guias",
+    "/generate-recoguidas",
     [
         apiKey,
         fmiddlewares.validateItem({
@@ -63,6 +63,6 @@ router.post(
             },   
         }),
     ],
-    orders.generateGuias
+    orders.generateRecogidas
 )
 module.exports = router

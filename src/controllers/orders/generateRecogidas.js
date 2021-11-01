@@ -1,7 +1,7 @@
 require("module-alias/register");
 const db = require("@app/db");
 
-const generateGuias = async (req,res) => {
+const generateRecogidas = async (req,res) => {
     try {
         const {guias} = req.body
         const result = await db.get({
@@ -12,7 +12,7 @@ const generateGuias = async (req,res) => {
         if(!shop){
             throw new Error("Invalid Shop")
         }
-        const guiasToGenerate = (shop.guias || []).filter((e)=>guias.includes(e.id_order))
+        const guiasToGenerateRecoguidas = (shop.guias || []).filter((e)=>guias.includes(e.id_order))
         res.send({
             type:"ok",
             orders,
@@ -26,4 +26,4 @@ const generateGuias = async (req,res) => {
         })
     }
 }
-module.exports = generateGuias
+module.exports = generateRecogidas
