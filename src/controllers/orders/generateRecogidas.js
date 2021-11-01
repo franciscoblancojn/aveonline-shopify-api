@@ -1,5 +1,6 @@
 require("module-alias/register");
 const db = require("@app/db");
+const { generateRecogidas } = require("@aveonline/_index");
 
 const generateRecogidas = async (req,res) => {
     try {
@@ -13,9 +14,11 @@ const generateRecogidas = async (req,res) => {
             throw new Error("Invalid Shop")
         }
         const guiasToGenerateRecoguidas = (shop.guias || []).filter((e)=>guias.includes(e.id_order))
+        const recoguidas = await generateRecogidas(guiasToGenerateRecoguidas)
         res.send({
             type:"ok",
-            orders,
+            guiasToGenerateRecoguidas,
+            recoguidas
         })
     } catch (error) {
         console.log(error);
