@@ -1,6 +1,5 @@
 require("module-alias/register");
 const db = require("@app/db");
-const {orders} = require("@shopify/_index");
 
 const getOrders = async (req,res) => {
     try {
@@ -12,14 +11,10 @@ const getOrders = async (req,res) => {
         if(!shop){
             throw new Error("Invalid Shop")
         }
-        const responde = await orders.get(shop)
-        if(responde.type !== "ok"){
-            throw responde
-        }
-        const ordersR = responde.orders.filter((e)=>e.shipping_lines.find((ele)=>ele.source=="Aveonline")!==undefined)
+        const orders = shop.guias || []
         res.send({
             type:"ok",
-            orders:ordersR,
+            orders,
         })
     } catch (error) {
         console.log(error);

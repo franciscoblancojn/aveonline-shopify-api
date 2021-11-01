@@ -21,7 +21,7 @@ const saveOrder = async (req, res) => {
         }
         const respond = await generateGuia({
             ...shop,
-            order: req.body
+            order
         })
         if(respond.status == 'error'){
             throw {
@@ -32,6 +32,7 @@ const saveOrder = async (req, res) => {
         const {guia} = respond.resultado
         delete guia.archivoguia
         delete guia.archivorotulo
+        guia.id_order = order.id
         const saveGuia = await db.put({
             where: req.query,
             data: {
