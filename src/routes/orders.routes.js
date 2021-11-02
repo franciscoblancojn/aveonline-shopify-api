@@ -68,4 +68,23 @@ router.post(
     ],
     orders.generateRecogidas
 )
+router.post(
+    "/generate-relacion-envio",
+    [
+        apiKey,
+        fmiddlewares.validateItem({
+            exactItems:true,
+            "shop": {
+                type:"string"
+            },   
+        },"query"),
+        fmiddlewares.validateItem({
+            exactItems:true,
+            "guias": {
+                type:"array"
+            },    
+        }),
+    ],
+    orders.generateRecogidas
+)
 module.exports = router

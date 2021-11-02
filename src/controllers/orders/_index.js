@@ -5,4 +5,5 @@ module.exports = {
     save : require('@controllers/orders/saveOrder'),
     addEnventCreate : require('@controllers/orders/addEnventCreate'),
     generateRecogidas : require('@controllers/orders/generateRecogidas'),
+    generateRelacionEnvio : require('@controllers/orders/generateRelacionEnvio'),
 }

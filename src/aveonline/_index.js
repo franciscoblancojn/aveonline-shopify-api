@@ -5,4 +5,5 @@ module.exports = {
     getToken :  require("@aveonline/getToken"),
     generateGuia :  require("@aveonline/generateGuia"),
     generateRecogidas :  require("@aveonline/generateRecogidas"),
+    generateRelacionEnvio :  require("@aveonline/generateRelacionEnvio"),
 }
