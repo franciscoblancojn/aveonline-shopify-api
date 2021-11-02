@@ -18,9 +18,9 @@ const generateRelacionEnvioEnpoint = async (req,res) => {
             guias: guiasToGenerateRelacion,
             config : shop.config,
         })
-        if(relacion.type!="ok"){
-            throw relacion
-        }
+        // if(relacion.type!="ok"){
+        //     throw relacion
+        // }
         res.send({
             type:"ok",
             relacion,

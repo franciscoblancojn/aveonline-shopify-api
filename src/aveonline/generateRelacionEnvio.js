@@ -3,22 +3,32 @@ const request = require("@functions/request");
 const getToken = require("@aveonline/getToken");
 
 const generateRelacionEnvio = async ({config, guias}) => {
-    const data = {
-        "tipo"              : "relacionEnvios",
-        "token"             : await getToken({ config }),
-        "idempresa"         : config.cuenta,
-        "transportadora"    : "",//pendiente
-        "guias"             : guias.map((e)=>e.numguia)
+    const guiasTransportadora = {}
+    guias.forEach(ele => {
+        guiasTransportadora[ele.codeTransportador] = [...(guiasTransportadora[ele.codeTransportador] || []),ele.numguia]
+    });
+    const transportadores = Object.keys(guiasTransportadora)
+    const result = []
+    for (var i = 0; i < transportadores.length; i++) {
+        const transportador = transportadores[i];
+        const data = {
+            "tipo"              : "relacionEnvios",
+            "token"             : await getToken({ config }),
+            "idempresa"         : config.cuenta,
+            "transportadora"    : transportador,//pendiente
+            "guias"             : guiasTransportadora[transportador]
+        }
+        console.log(data);
+        // result.push( await request({
+        //     method: "POST",
+        //     url: "https://aveonline.co/api/nal/v1.0/generarGuiaTransporteNacional.php",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        //     data,
+        // }))
+        
     }
-    console.log(data);
-    const result = await request({
-        method: "POST",
-        url: "https://aveonline.co/api/nal/v1.0/generarGuiaTransporteNacional.php",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        data,
-    })
     return result
     
 }
