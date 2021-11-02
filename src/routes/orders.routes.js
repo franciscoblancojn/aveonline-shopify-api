@@ -85,6 +85,6 @@ router.post(
             },    
         }),
     ],
-    orders.generateRecogidas
+    orders.generateRelacionEnvio
 )
 module.exports = router
