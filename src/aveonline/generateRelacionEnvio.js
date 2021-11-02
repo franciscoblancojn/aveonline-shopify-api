@@ -19,14 +19,14 @@ const generateRelacionEnvio = async ({config, guias}) => {
             "guias"             : guiasTransportadora[transportador]
         }
         console.log(data);
-        // result.push( await request({
-        //     method: "POST",
-        //     url: "https://aveonline.co/api/nal/v1.0/generarGuiaTransporteNacional.php",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        //     data,
-        // }))
+        result.push( await request({
+            method: "POST",
+            url: "https://aveonline.co/api/nal/v1.0/generarGuiaTransporteNacional.php",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            data,
+        }))
         
     }
     return result
