@@ -4,11 +4,10 @@ const getToken = require("@aveonline/getToken");
 
 const generateRelacionEnvio = async ({config, guias}) => {
     const data = {
-        "tipo"              : "generarRecogida2",
+        "tipo"              : "relacionEnvios",
         "token"             : await getToken({ config }),
         "idempresa"         : config.cuenta,
-        "idagente"          : config.agente,
-        "dscom"             : note,
+        "transportadora"    : "",//pendiente
         "guias"             : guias.map((e)=>e.numguia)
     }
     console.log(data);
