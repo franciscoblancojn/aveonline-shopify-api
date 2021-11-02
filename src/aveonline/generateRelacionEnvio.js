@@ -16,7 +16,7 @@ const generateRelacionEnvio = async ({config, guias}) => {
             "token"             : await getToken({ config }),
             "idempresa"         : config.cuenta,
             "transportadora"    : transportador,//pendiente
-            "guias"             : guiasTransportadora[transportador]
+            "guias"             : guiasTransportadora[transportador].join(",")
         }
         console.log(data);
         result.push( await request({
