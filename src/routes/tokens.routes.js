@@ -26,19 +26,5 @@ router.post(
     tokens.save
 )
 
-router.delete(
-    "/",
-    [
-        apiKey,
-        fmiddlewares.validateItem({
-            exactItems:true,
-            token:{
-                type:"string"
-            }
-        },"query"),
-    ],
-    tokens.save
-)
-
 
 module.exports = router

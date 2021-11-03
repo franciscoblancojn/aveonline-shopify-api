@@ -20,4 +20,18 @@ router.get(
     shop.get
 )
 
+
+router.delete(
+    "/",
+    [
+        apiKey,
+        fmiddlewares.validateItem({
+            exactItems:true,
+            token:{
+                type:"string"
+            }
+        },"query"),
+    ],
+    shop.delete
+)
 module.exports = router
