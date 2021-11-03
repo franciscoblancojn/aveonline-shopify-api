@@ -24,7 +24,8 @@ const generateRelacionEnvioEnpoint = async (req,res) => {
         }
         var swError = false
         const errorsR = []
-        relacion.forEach(rel => {
+        for (var i = 0; i < relacion.length; i++){
+            const rel = relacion[i]
             if(rel.type!="ok"){
                 errorsR.push(rel)
                 swError = true
@@ -53,7 +54,7 @@ const generateRelacionEnvioEnpoint = async (req,res) => {
                     table: `shops`,
                 });
             }
-        });
+        }
         if(swError){
             throw errorsR
         }
