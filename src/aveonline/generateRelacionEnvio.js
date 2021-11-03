@@ -18,7 +18,6 @@ const generateRelacionEnvio = async ({config, guias}) => {
             "transportadora"    : transportador,//pendiente
             "guias"             : guiasTransportadora[transportador].join(",")
         }
-        console.log(data);
         const respond = await request({
             method: "POST",
             url: "https://aveonline.co/api/nal/v1.0/generarGuiaTransporteNacional.php",
@@ -27,7 +26,6 @@ const generateRelacionEnvio = async ({config, guias}) => {
             },
             data,
         })
-        console.log(respond);
         respond.guias = guiasTransportadora[transportador]
         result.push(respond)
     }

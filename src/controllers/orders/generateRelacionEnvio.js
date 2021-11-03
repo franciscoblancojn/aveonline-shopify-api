@@ -19,8 +19,43 @@ const generateRelacionEnvioEnpoint = async (req,res) => {
             config : shop.config,
         })
         console.log(relacion);
-        if(relacion.type!="ok"){
+        if(!relacion){
             throw relacion
+        }
+        var swError = false
+        const errorsR = []
+        relacion.forEach(rel => {
+            if(rel.type!="ok"){
+                errorsR.push(rel)
+                swError = true
+            }else if(rel.status!="ok"){
+                errorsR.push(rel)
+                swError = true
+            }else{
+                const guias = shop.guias.map((e)=>{
+                    if(rel.guias.includes(e.numguia)){
+                        e.relacionDeEnvio = rel.relacionenvio
+                        e.relacionDeEnvioUrl = rel.rutaimpresion
+                        e.relacionDeEnvioFecha = rel.fecha
+                    }
+                    return e
+                })
+                await db.put({
+                    where: req.query,
+                    data: {
+                        $set: {
+                            guias
+                        },
+                    },
+                    options: {
+                        upsert: true,
+                    },
+                    table: `shops`,
+                });
+            }
+        });
+        if(swError){
+            throw errorsR
         }
         res.send({
             type:"ok",
