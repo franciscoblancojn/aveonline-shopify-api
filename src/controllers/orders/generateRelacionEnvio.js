@@ -38,6 +38,7 @@ const generateRelacionEnvioEnpoint = async (req,res) => {
                         e.relacionDeEnvio = rel.relacionenvio
                         e.relacionDeEnvioUrl = rel.rutaimpresion
                         e.relacionDeEnvioFecha = rel.fecha
+                        e.statusRelacion = "Generada"
                     }
                     return e
                 })
