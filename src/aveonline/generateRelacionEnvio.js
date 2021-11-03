@@ -28,6 +28,7 @@ const generateRelacionEnvio = async ({config, guias}) => {
             data,
         })
         console.log(respond);
+        respond.guias = guiasTransportadora[transportador]
         result.push(respond)
     }
     return result
