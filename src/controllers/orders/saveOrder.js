@@ -53,7 +53,7 @@ const saveOrder = async (req, res) => {
             table: `shops`,
         });
 
-        return res.send(req.body);
+        return res.status(200).send("OK");
     } catch (error) {
         console.log(error);
         if(error.type === 'errorGenerarGuia'){
@@ -72,7 +72,7 @@ const saveOrder = async (req, res) => {
                 },
                 table: `shops`,
             });
-            return res.send(req.body);
+            return res.status(200).send("OK");
         }
         res.status(500).send({
             type: "error",
