@@ -118,12 +118,13 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
                 eng:config.envioGratis?1:0
             }
             const requestJson = Buffer.from(JSON.stringify(dataRequestJson)).toString('base64')
+            const price = config.envioGratis? 0 : e.total
             return {
                 service_name: `Aveonline ${e.nombreTransportadora} ${
                     e.contraentrega ? " - Contraentrega" : ""
                 }`,
                 service_code: `ave_${e.codTransportadora}_${requestJson}`,
-                total_price: `${e.total}00`,
+                total_price: `${price}00`,
                 description: "Metodo de Envio de Aveonline",
                 currency: "COP",
             };
