@@ -114,7 +114,8 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
                 idt:e.codTransportadora,
                 con:e.contraentrega,
                 val:valorrecaudo,
-                des:destino
+                des:destino,
+                eng:config.envioGratis?1:0
             }
             const requestJson = Buffer.from(JSON.stringify(dataRequestJson)).toString('base64')
             return {

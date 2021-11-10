@@ -347,7 +347,8 @@ const generateGuia = async ({ config, order, products, shop }) => {
         "guiahija"          : "",
         "accesoila"         : "",
         "cartaporte"        : "",
-        "valorMinimo"       : (config.valorMinimo)?1:0
+        "valorMinimo"       : (config.valorMinimo)?1:0,
+        "envioGratis"       : requestJson.eng,
     }
     const result = await request({
         method: "POST",
