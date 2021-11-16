@@ -14,14 +14,18 @@ const saveOrder = async (req, res) => {
         }
         const order = req.body;
         if((shop.guias || []).find((e)=>e.id_order == order.id)){
-            throw new Error("Guia ya generada")
+            throw {
+                type:"Guia ya generada",
+            }
         }
 
         const isAveonline = order.shipping_lines.find(
             (ele) => ele.source == "Aveonline"
         );
         if (isAveonline === undefined) {
-            throw new Error("No Aveonline");
+            throw {
+                type:"no Aveonline",
+            }
         }
         const respond = await generateGuia({
             ...shop,
@@ -72,6 +76,9 @@ const saveOrder = async (req, res) => {
                 },
                 table: `shops`,
             });
+            return res.status(200).send("OK");
+        }
+        if(["Guia ya generada","no Aveonline"].includes(error.type)){
             return res.status(200).send("OK");
         }
         res.status(500).send({
