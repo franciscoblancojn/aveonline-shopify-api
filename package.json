@@ -10,7 +10,8 @@
     "pm2init": "pm2 start src/api.js && pm2 save",
     "pm2restart": "pm2 restart src/api.js && pm2 save",
     "pull": "git pull origin master && npm run pm2restart",
-    "pulldev": "git pull origin master && npm run dev"
+    "pulldev": "git pull origin master && npm run dev",
+    "push": "git push && git push github"
   },
   "repository": {
     "type": "git",
