@@ -5,7 +5,7 @@
   "main": "/src/api.js",
   "scripts": {
     "start": "node src/api.js",
-    "dev": "nodemon --watch src src/api.js",
+    "dev": "MODE=DEV nodemon src/api.js",
     "push": "git push && git push github"
   },
   "repository": {

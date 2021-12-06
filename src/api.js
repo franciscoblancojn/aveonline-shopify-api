@@ -1,5 +1,6 @@
 // requires
 require('module-alias/register')
+const env = require("@app/env")
 const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
@@ -10,7 +11,7 @@ const cors = require('cors')
 /**
  * @description port and rute
  */
-const port = 3001
+const port = env.PORT || 3001
 
 /**
  * @description load app
