@@ -6,11 +6,6 @@
   "scripts": {
     "start": "node src/api.js",
     "dev": "nodemon --watch src src/api.js",
-    "test": "nodemon src/test.js",
-    "pm2init": "pm2 start src/api.js && pm2 save",
-    "pm2restart": "pm2 restart src/api.js && pm2 save",
-    "pull": "git pull origin master && npm run pm2restart",
-    "pulldev": "git pull origin master && npm run dev",
     "push": "git push && git push github"
   },
   "repository": {
@@ -24,7 +19,6 @@
   },
   "homepage": "https://gitlab.com/franciscoblancojn/aveonline-shopify-nodejs#readme",
   "dependencies": {
-    "@prisma/client": "^2.27.0",
     "axios": "^0.23.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
@@ -53,11 +47,5 @@
     "@shopify": "src/shopify/",
     "@aveonline": "src/aveonline/",
     "@routes": "src/routes/"
-  },
-  "devDependencies": {
-    "prisma": "^2.27.0"
-  },
-  "prisma": {
-    "schema": "src/prisma/schema.prisma"
   }
 }
