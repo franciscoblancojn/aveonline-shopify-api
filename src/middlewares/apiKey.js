@@ -1,5 +1,4 @@
-const dotenv = require('dotenv').config()
-const env = dotenv.parsed
+const env = require("@app/env")
 const fmiddlewares = require('fmiddlewares')
 
 module.exports = fmiddlewares.validateItem({
