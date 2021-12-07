@@ -4,6 +4,9 @@ const { cotizar } = require("@aveonline/_index");
 
 const getShipping = async (req, res) => {
     try {
+        if (env.LOG === "TRUE") {
+            console.log("/shipping");
+        }
         const result = await db.get({
             query: req.query,
             table: "shops",
