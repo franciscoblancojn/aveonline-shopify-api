@@ -1,4 +1,5 @@
 require("module-alias/register");
+const env = require("@app/env");
 const db = require("@app/db");
 const { generateRecogidas } = require("@aveonline/_index");
 
@@ -48,7 +49,13 @@ const generateRecogidasEnpoint = async (req,res) => {
             saveNewGuias
         })
     } catch (error) {
-        console.log(error);
+        if (env.LOG === "TRUE") {
+            console.log(error);
+            await db.post({
+                data: error,
+                table: "logs",
+            });
+        }
         res.status(500).send({
             type:"error",
             msj:`${error}`,

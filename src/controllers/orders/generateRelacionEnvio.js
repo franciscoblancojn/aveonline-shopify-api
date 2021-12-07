@@ -1,4 +1,5 @@
 require("module-alias/register");
+const env = require("@app/env");
 const db = require("@app/db");
 const { generateRelacionEnvio } = require("@aveonline/_index");
 
@@ -64,7 +65,13 @@ const generateRelacionEnvioEnpoint = async (req,res) => {
             relacion,
         })
     } catch (error) {
-        console.log(error);
+        if (env.LOG === "TRUE") {
+            console.log(error);
+            await db.post({
+                data: error,
+                table: "logs",
+            });
+        }
         res.status(500).send({
             type:"error",
             msj:`${error}`,

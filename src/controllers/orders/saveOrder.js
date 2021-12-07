@@ -1,4 +1,5 @@
 require("module-alias/register");
+const env = require("@app/env");
 const db = require("@app/db");
 const { generateGuia } = require("@aveonline/_index");
 
@@ -59,9 +60,15 @@ const saveOrder = async (req, res) => {
 
         return res.status(200).send("OK");
     } catch (error) {
-        console.log(error);
+        if (env.LOG === "TRUE") {
+            console.log(error);
+            await db.post({
+                data: error,
+                table: "logs",
+            });
+        }
         if(error.type === 'errorGenerarGuia'){
-            const saveError = await db.put({
+            await db.put({
                 where: req.query,
                 data: {
                     $push: {

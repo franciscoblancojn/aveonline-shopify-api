@@ -1,4 +1,5 @@
 require("module-alias/register");
+const env = require("@app/env");
 const db = require("@app/db");
 
 const saveConfig = async (req,res) => {
@@ -12,12 +13,19 @@ const saveConfig = async (req,res) => {
             },
             table: `shops`,
         });
-        res.send({
+        return res.send({
             type:"ok",
             msj:"Config Save",
             result
         })
     } catch (error) {
+        if (env.LOG === "TRUE") {
+            console.log(error);
+            await db.post({
+                data: error,
+                table: "logs",
+            });
+        }
         res.status(500).send({
             type:"error",
             msj:`${error}`,

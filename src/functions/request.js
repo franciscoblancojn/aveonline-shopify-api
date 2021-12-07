@@ -7,21 +7,6 @@ module.exports = async (config) => {
     try {
         const response = await axios(config);
         const data = response.data;
-        console.log({
-            request: {
-                send: config,
-                result: data,
-            },
-        });
-        await db.post({
-            data: {
-                request: {
-                    send: config,
-                    result: data,
-                },
-            },
-            table: "logs",
-        });
         if (env.LOG === "TRUE") {
             console.log({
                 request: {
@@ -44,6 +29,13 @@ module.exports = async (config) => {
             ...data,
         };
     } catch (error) {
+        if (env.LOG === "TRUE") {
+            console.log(error);
+            await db.post({
+                data: error,
+                table: "logs",
+            });
+        }
         return {
             type: "error",
             msj: `${error}`,

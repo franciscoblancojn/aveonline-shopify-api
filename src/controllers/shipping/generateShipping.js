@@ -1,4 +1,5 @@
 require("module-alias/register");
+const env = require("@app/env");
 const db = require("@app/db");
 const {shipping} = require("@shopify/_index");
 
@@ -38,6 +39,13 @@ const generateShipping = async (req,res) => {
         })
         res.send(newCarrier)
     } catch (error) {
+        if (env.LOG === "TRUE") {
+            console.log(error);
+            await db.post({
+                data: error,
+                table: "logs",
+            });
+        }
         res.status(500).send({
             type:"error",
             msj:`${error}`,

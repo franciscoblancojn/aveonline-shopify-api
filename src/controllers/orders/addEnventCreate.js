@@ -1,4 +1,5 @@
 require("module-alias/register");
+const env = require("@app/env");
 const db = require("@app/db");
 const {webhooks} = require("@shopify/_index");
 
@@ -39,12 +40,18 @@ const addEnventCreate = async (req,res) => {
             })
         }
         
-        res.send({
+        return res.send({
             type:"ok",
             listWebHooks
         })
     } catch (error) {
-        console.log(error);
+        if (env.LOG === "TRUE") {
+            console.log(error);
+            await db.post({
+                data: error,
+                table: "logs",
+            });
+        }
         res.status(500).send({
             type:"error",
             msj:`${error}`,
