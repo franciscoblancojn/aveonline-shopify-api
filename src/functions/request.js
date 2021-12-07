@@ -9,17 +9,13 @@ module.exports = async (config) => {
         const data = response.data;
         if (env.LOG === "TRUE") {
             console.log({
-                request: {
-                    send: config,
-                    result: data,
-                },
+                send: config,
+                result: data,
             });
             await db.post({
                 data: {
-                    request: {
-                        send: config,
-                        result: data,
-                    },
+                    send: config,
+                    result: data,
                 },
                 table: "logs",
             });
