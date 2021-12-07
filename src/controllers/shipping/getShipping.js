@@ -1,9 +1,11 @@
 require("module-alias/register");
+const env = require("@app/env");
 const db = require("@app/db");
 const { cotizar } = require("@aveonline/_index");
 
 const getShipping = async (req, res) => {
     try {
+        console.log(req.body);
         if (env.LOG === "TRUE") {
             console.log("/shipping");
         }
