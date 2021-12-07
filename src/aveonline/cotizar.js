@@ -92,9 +92,9 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
         idempresa: config.cuenta,
         origen: origen.idciudad,
         destino,
-        idasumecosto: 1,
-        contraentrega: 1,
-        valorrecaudo: valorrecaudo,
+        idasumecosto: 0,
+        contraentrega: 0,
+        valorrecaudo: 0,
         productos: products, 
         valorMinimo: config.valorMinimo ? 1 : 0,
     };
