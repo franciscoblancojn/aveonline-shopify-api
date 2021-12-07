@@ -86,7 +86,7 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
     });
     const origen = config.option_agente.find((e) => e.value == config.agente);
     const data = {
-        tipo: "cotizarDoble",
+        tipo: "cotizar2",
         access: "",
         token: await getToken({ config }),
         idempresa: config.cuenta,
