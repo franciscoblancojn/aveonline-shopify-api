@@ -5,7 +5,7 @@ const { cotizar } = require("@aveonline/_index");
 
 const getShipping = async (req, res) => {
     try {
-        console.log(req.body);
+        console.log(env);
         if (env.LOG === "TRUE") {
             console.log("/shipping");
         }
