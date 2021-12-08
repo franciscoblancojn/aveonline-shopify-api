@@ -61,7 +61,7 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
     ) {
         return [];
     }
-    const destino = processDestination(checkout.destination)
+    const destino = await processDestination(checkout.destination)
     var valorrecaudo = 0;
     const products = checkout.items.map((e) => {
         const proudctShopify = productsShopify.find(

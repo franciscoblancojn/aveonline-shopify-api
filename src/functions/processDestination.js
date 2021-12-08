@@ -8483,7 +8483,7 @@ const validateDestination= (des) => {
     ]
     return desValides.includes(des)
 }
-const processDestination = (destination) => {
+const processDestination = async (destination) => {
     const city = destination.city.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleUpperCase();
     const des = `${city}${processProvince(`(${destination.province})`)}`.toLocaleUpperCase()
     await log({
