@@ -1,6 +1,7 @@
 require("module-alias/register");
 const env = require("@app/env");
 const db = require("@app/db");
+const log = require("@app/functions/log");
 
 const getShop = async (req,res) => {
     try {
@@ -8,18 +9,22 @@ const getShop = async (req,res) => {
             query:req.query,
             table:"shops"
         })
+        await log({
+            type: "getShop",
+            data: {
+                where:req.query,
+                result
+            },
+        });
         res.send({
             type:"ok",
             result
         })
     } catch (error) {
-        if (env.LOG === "TRUE") {
-            console.log(error);
-            await db.post({
-                data: error,
-                table: "logs",
-            });
-        }
+        await log({
+            type: "error",
+            data: error,
+        });
         res.status(500).send({
             type:"error",
             msj:`${error}`,
