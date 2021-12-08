@@ -1,10 +1,15 @@
 require("module-alias/register");
 const env = require("@app/env");
 const db = require("@app/db");
+const log = require("@app/functions/log");
 const { cotizar } = require("@aveonline/_index");
 
 const getShipping = async (req, res) => {
     try {
+        await log({
+            type: "[POST] /shipping",
+            data: req.body,
+        });
         const result = await db.get({
             query: req.query,
             table: "shops",
@@ -16,39 +21,27 @@ const getShipping = async (req, res) => {
         const config = shop.config;
         const productsShopify = shop.products;
         const checkout = req.body.rate;
-        if (env.LOG === "TRUE") {
-            await db.post({
-                data: {
-                    type: "pre cotizar",
-                    checkout,
-                    productsShopify,
-                    config,
-                },
-                table: "logs",
-            });
-        }
+        await log({
+            type: "pre cotizar",
+            data: {
+                checkout,
+                productsShopify,
+                config,
+            },
+        });
         const cotizacion = await cotizar({ config, checkout, productsShopify });
-
-        if (env.LOG === "TRUE") {
-            await db.post({
-                data: {
-                    type: "cotizar",
-                    cotizacion,
-                },
-                table: "logs",
-            });
-        }
+        await log({
+            type: "cotizar",
+            data: cotizacion,
+        });
         res.send({
             rates: cotizacion,
         });
     } catch (error) {
-        if (env.LOG === "TRUE") {
-            console.log(error);
-            await db.post({
-                data: error,
-                table: "logs",
-            });
-        }
+        await log({
+            type: "error",
+            data: error,
+        });
         await db.put({
             where: req.query,
             data: {
