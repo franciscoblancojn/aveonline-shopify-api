@@ -16,6 +16,7 @@ module.exports = async (config) => {
                 data: {
                     send: config,
                     result: data,
+                    date:(new Date())
                 },
                 table: "logs",
             });
