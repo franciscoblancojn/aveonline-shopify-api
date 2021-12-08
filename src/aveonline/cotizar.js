@@ -69,7 +69,7 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
         );
         if (!proudctShopify) {
             throw {
-                msj:`No valido para Cotizar ${e.variant_id} ${e.title}`
+                msj:`No valido para Cotizar ${e.variant_id} ${e.name}`
             };
         }
         const { weigth, width, height, length, valorDeclarado } = proudctShopify;
