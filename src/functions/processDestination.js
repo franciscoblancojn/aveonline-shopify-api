@@ -1,3 +1,5 @@
+const log = require("@app/functions/log");
+
 const processProvince = (ele) => {
     const provices = {
         "(ANT)"   :  "(ANTIOQUIA)",
@@ -8484,6 +8486,14 @@ const validateDestination= (des) => {
 const processDestination = (destination) => {
     const city = destination.city.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleUpperCase();
     const des = `${city}${processProvince(`(${destination.province})`)}`.toLocaleUpperCase()
+    await log({
+        type: "processDestination",
+        data: {
+            destination,
+            city,
+            des,
+        },
+    });
     if(!validateDestination(des)){
         throw {
             type:"Error Cotizando",
