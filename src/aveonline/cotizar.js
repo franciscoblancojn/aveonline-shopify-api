@@ -68,11 +68,15 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
             (ele) => ele.id == e.variant_id
         );
         if (!proudctShopify) {
-            throw new Error("No valido para Cotizar");
+            throw {
+                msj:`No valido para Cotizar ${proudctShopify.id} ${proudctShopify.title}`
+            };
         }
         const { weigth, width, height, length, valorDeclarado } = proudctShopify;
         if (!proudctShopify.cotizar) {
-            throw new Error("No valido para Cotizar");
+            throw {
+                msj:`No valido para Cotizar ${proudctShopify.id} ${proudctShopify.title}`
+            };
         }
         valorrecaudo += e.quantity * e.price;
         return {
@@ -128,7 +132,11 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
                 currency: "COP",
             };
         });
+    }else{
+        throw {
+            msj:"Error Cotizar API Aveonline",
+            result
+        };
     }
-    return [];
 };
 module.exports = cotizar;
