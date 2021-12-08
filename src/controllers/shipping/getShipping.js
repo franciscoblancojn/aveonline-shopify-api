@@ -16,10 +16,28 @@ const getShipping = async (req, res) => {
         const config = shop.config;
         const productsShopify = shop.products;
         const checkout = req.body.rate;
+        if (env.LOG === "TRUE") {
+            await db.post({
+                data: {
+                    type: "pre cotizar",
+                    checkout,
+                    productsShopify,
+                    config,
+                },
+                table: "logs",
+            });
+        }
         const cotizacion = await cotizar({ config, checkout, productsShopify });
 
-        console.log(cotizacion);
-
+        if (env.LOG === "TRUE") {
+            await db.post({
+                data: {
+                    type: "cotizar",
+                    cotizacion,
+                },
+                table: "logs",
+            });
+        }
         res.send({
             rates: cotizacion,
         });
