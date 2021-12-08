@@ -33,7 +33,7 @@ const generateShipping = async (req,res) => {
             data:{
                 "carrier_service": {
                     "name": "Aveonline",
-                    "callback_url": `https://aveonline.startscoinc.com/api/v1/shipping?shop=${shop.shop}`,
+                    "callback_url": `${env.URLAPI}/shipping?shop=${shop.shop}`,
                     "service_discovery": true
                 }
             }
