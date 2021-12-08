@@ -1,40 +1,42 @@
 require("module-alias/register");
 const env = require("@app/env");
 const db = require("@app/db");
+const log = require("@app/functions/log");
 const { generateRecogidas } = require("@aveonline/_index");
 
-const generateRecogidasEnpoint = async (req,res) => {
+const generateRecogidasEnpoint = async (req, res) => {
     try {
-        const {guias, note} = req.body
+        const { guias, note } = req.body;
         const result = await db.get({
-            query:req.query,
-            table:"shops"
-        })
-        const shop = result[0]
-        if(!shop){
-            throw new Error("Invalid Shop")
+            query: req.query,
+            table: "shops",
+        });
+        const shop = result[0];
+        if (!shop) {
+            throw new Error("Invalid Shop");
         }
-        const guiasToGenerateRecoguidas = (shop.guias || []).filter((e)=>guias.includes(e.id_order))
+        const guiasToGenerateRecoguidas = (shop.guias || []).filter((e) =>
+            guias.includes(e.id_order)
+        );
         const recoguidas = await generateRecogidas({
             note,
             guias: guiasToGenerateRecoguidas,
-            config : shop.config,
-        })
-        if(recoguidas.type!="ok"){
-            throw recoguidas
+            config: shop.config,
+        });
+        if (recoguidas.type != "ok") {
+            throw recoguidas;
         }
-        const newGuias = (shop.guias || []).map((e)=>{
-            if(guias.includes(e.id_order)){
-                e.status = "Generada"
+        const newGuias = (shop.guias || []).map((e) => {
+            if (guias.includes(e.id_order)) {
+                e.status = "Generada";
             }
-            return e
-        })
-        console.log(newGuias);
+            return e;
+        });
         const saveNewGuias = await db.put({
             where: req.query,
             data: {
                 $set: {
-                    guias : newGuias
+                    guias: newGuias,
                 },
             },
             options: {
@@ -42,25 +44,25 @@ const generateRecogidasEnpoint = async (req,res) => {
             },
             table: `shops`,
         });
-        console.log(saveNewGuias);
+        await log({
+            type: "saveNewGuias",
+            data: saveNewGuias,
+        });
         res.send({
-            type:"ok",
+            type: "ok",
             recoguidas,
-            saveNewGuias
-        })
+            saveNewGuias,
+        });
     } catch (error) {
-        if (env.LOG === "TRUE") {
-            console.log(error);
-            await db.post({
-                data: error,
-                table: "logs",
-            });
-        }
+        await log({
+            type: "error",
+            data: error,
+        });
         res.status(500).send({
-            type:"error",
-            msj:`${error}`,
-            error
-        })
+            type: "error",
+            msj: `${error}`,
+            error,
+        });
     }
-}
-module.exports = generateRecogidasEnpoint
+};
+module.exports = generateRecogidasEnpoint;
