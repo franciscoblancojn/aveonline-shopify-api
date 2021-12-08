@@ -18,7 +18,7 @@ const generateShipping = async (req,res) => {
         const {carrier_services} = respond
         if(!carrier_services){
             console.log(respond);
-            throw new Error(respond)
+            throw respond
         }
         const shippingAve = carrier_services.find((e)=>e.name === "Aveonline")
         if(shippingAve !== undefined){
