@@ -79,7 +79,8 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
                 msj: `No valido para Cotizar ${proudctShopify.id} ${proudctShopify.title}`,
             };
         }
-        valorrecaudo += e.quantity * e.price;
+        const priceProduct =  e.price / 100
+        valorrecaudo += e.quantity * priceProduct;
         return {
             alto: height,
             largo: length,
@@ -90,7 +91,7 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
                 valorDeclarado == undefined ||
                 valorDeclarado == null ||
                 valorDeclarado == ""
-                    ? e.price
+                    ? priceProduct
                     : valorDeclarado,
         };
     });
