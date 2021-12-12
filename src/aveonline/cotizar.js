@@ -61,7 +61,7 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
     ) {
         return [];
     }
-    const destino = await processDestination(checkout.destination)
+    const destino = await processDestination(checkout.destination);
     var valorrecaudo = 0;
     const products = checkout.items.map((e) => {
         const proudctShopify = productsShopify.find(
@@ -69,23 +69,29 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
         );
         if (!proudctShopify) {
             throw {
-                msj:`No valido para Cotizar ${e.variant_id} ${e.name}`
+                msj: `No valido para Cotizar ${e.variant_id} ${e.name}`,
             };
         }
-        const { weigth, width, height, length, valorDeclarado } = proudctShopify;
+        const { weigth, width, height, length, valorDeclarado } =
+            proudctShopify;
         if (!proudctShopify.cotizar) {
             throw {
-                msj:`No valido para Cotizar ${proudctShopify.id} ${proudctShopify.title}`
+                msj: `No valido para Cotizar ${proudctShopify.id} ${proudctShopify.title}`,
             };
         }
         valorrecaudo += e.quantity * e.price;
         return {
-            alto: height, 
-            largo: length, 
-            ancho: width, 
+            alto: height,
+            largo: length,
+            ancho: width,
             peso: weigth,
             unidades: e.quantity,
-            valorDeclarado: (valorDeclarado == undefined || valorDeclarado == null || valorDeclarado == "") ? e.price : valorDeclarado, 
+            valorDeclarado:
+                valorDeclarado == undefined ||
+                valorDeclarado == null ||
+                valorDeclarado == ""
+                    ? e.price
+                    : valorDeclarado,
         };
     });
     const origen = config.option_agente.find((e) => e.value == config.agente);
@@ -99,7 +105,7 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
         idasumecosto: 0,
         contraentrega: 0,
         valorrecaudo: 0,
-        productos: products, 
+        productos: products,
         valorMinimo: config.valorMinimo ? 1 : 0,
     };
     const result = await request({
@@ -110,18 +116,31 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
         },
         data,
     });
+    var envioGratis = false;
+    if (config.envioGratis) {
+        if (!config.minEnvioGratis) {
+            if (parseFloat(config.minEnvioGratis) > valorrecaudo) {
+                envioGratis = true;
+            }
+        } else {
+            envioGratis = true;
+        }
+    }
+
     if (result.type === "ok" && result.status === "ok") {
         delete data.token;
         return result.cotizaciones.map((e) => {
             const dataRequestJson = {
-                idt:e.codTransportadora,
-                con:e.contraentrega,
-                val:valorrecaudo,
-                des:destino,
-                eng:config.envioGratis?1:0
-            }
-            const requestJson = Buffer.from(JSON.stringify(dataRequestJson)).toString('base64')
-            const price = config.envioGratis? 0 : e.total
+                idt: e.codTransportadora,
+                con: e.contraentrega,
+                val: valorrecaudo,
+                des: destino,
+                eng: envioGratis ? 1 : 0,
+            };
+            const requestJson = Buffer.from(
+                JSON.stringify(dataRequestJson)
+            ).toString("base64");
+            const price = envioGratis ? 0 : e.total;
             return {
                 service_name: `Aveonline ${e.nombreTransportadora} ${
                     e.contraentrega ? " - Contraentrega" : ""
@@ -132,10 +151,10 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
                 currency: "COP",
             };
         });
-    }else{
+    } else {
         throw {
-            msj:"Error Cotizar API Aveonline",
-            result
+            msj: "Error Cotizar API Aveonline",
+            result,
         };
     }
 };
