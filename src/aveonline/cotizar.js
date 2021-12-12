@@ -79,7 +79,7 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
                 msj: `No valido para Cotizar ${proudctShopify.id} ${proudctShopify.title}`,
             };
         }
-        const priceProduct =  e.price / 100
+        const priceProduct = e.price / 100;
         valorrecaudo += e.quantity * priceProduct;
         return {
             alto: height,
@@ -119,8 +119,8 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
     });
     var envioGratis = false;
     if (config.envioGratis) {
-        if (!config.minEnvioGratis) {
-            if (parseFloat(config.minEnvioGratis) > valorrecaudo) {
+        if (config.minEnvioGratis != "" && config.minEnvioGratis != null) {
+            if (parseFloat(config.minEnvioGratis) >= valorrecaudo) {
                 envioGratis = true;
             }
         } else {
