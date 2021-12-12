@@ -120,7 +120,7 @@ const cotizar = async ({ config, checkout, productsShopify }) => {
     var envioGratis = false;
     if (config.envioGratis) {
         if (config.minEnvioGratis != "" && config.minEnvioGratis != null) {
-            if (parseFloat(config.minEnvioGratis) >= valorrecaudo) {
+            if (parseFloat(config.minEnvioGratis) <= valorrecaudo) {
                 envioGratis = true;
             }
         } else {
