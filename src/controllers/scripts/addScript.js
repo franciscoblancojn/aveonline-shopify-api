@@ -18,7 +18,7 @@ const addScript = async (req,res) => {
             throw new Error("No se puede leer los Scripts")
         }
         const {script_tags} = respond
-        const src = "https://aveonline.startscoinc.com/api/v1/public/js/checkout.js"
+        const src = `${env.URLAPI}/api/v1/public/js/checkout.js`
         const scriptAveonline = script_tags.find((e)=>e.src == src)
 
         if(scriptAveonline === undefined){
