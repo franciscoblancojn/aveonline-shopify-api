@@ -15,6 +15,10 @@ const saveOrder = async (req, res) => {
             throw new Error("Invalid Shop");
         }
         const order = req.body;
+        await log({
+            type: "[POST] /orders/save",
+            data: order,
+        });
         if((shop.guias || []).find((e)=>e.id_order == order.id)){
             throw {
                 type:"Guia ya generada",
@@ -33,6 +37,10 @@ const saveOrder = async (req, res) => {
             ...shop,
             order
         })
+        await log({
+            type: "[POST] /orders/save generateGuia",
+            data: respond,
+        });
         if(respond.status == 'error'){
             throw {
                 type:"errorGenerarGuia",
@@ -43,6 +51,10 @@ const saveOrder = async (req, res) => {
         delete guia.archivoguia
         delete guia.archivorotulo
         guia.id_order = order.id
+        await log({
+            type: "[POST] /orders/save guia",
+            data: guia,
+        });
         const saveGuia = await db.put({
             where: req.query,
             data: {
