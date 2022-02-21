@@ -27,7 +27,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.raw())
 app.use(express.urlencoded({ extended: false }))
 app.use((req, res, next) => {
-  res.header('Content-Security-Policy', "frame-ancestors 'none'")
+  res.header('Content-Security-Policy', "frame-ancestors '*'")
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Request-Headers', '*')
   res.header('Access-Control-Request-Methods', '*')
