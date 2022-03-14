@@ -8,6 +8,7 @@ const deleteClient = async (req,res) => {
         await log({
             type: "deleteClient",
             data: {
+                method : req.method,
                 header: req.header,
                 query: req.query,
                 body:req.body,

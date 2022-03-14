@@ -8,6 +8,7 @@ const getClient = async (req,res) => {
         await log({
             type: "getClient",
             data: {
+                method : req.method,
                 header: req.header,
                 query: req.query,
                 body:req.body,
