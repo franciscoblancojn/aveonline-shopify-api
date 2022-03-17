@@ -17,9 +17,6 @@ const port = env.PORT || 3001
  * @description load app
  */
 const app = express()
-app.use(cors({
-  origin: '*'
-}))
 app.set('port', port)
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -36,6 +33,9 @@ app.use((req, res, next) => {
   res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE')
   next()
 });
+app.use(cors({
+  origin: '*'
+}))
 
 app.use('/api/v1', routes)
 
